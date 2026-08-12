@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@100..900&display=swap');
+:root {
+	--inside-color: #333;	
+  --main-button-color: #A7A7A7; 
+}
+
+button:hover {
+    background-color: white;
+    color: black;
+}
+button:active {
+    background-color: #464545;
+    color: white;
+}
+a:link {
+  color: #BBB;
+}
+a:visited {
+  color: #9A9A9A;
+}
+a:hover {
+  color: #FFF;
+}
+a:active {
+  color: #959595;
+}
