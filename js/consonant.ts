@@ -110,7 +110,7 @@ function evalD(invalid_d: boolean, alpha: boolean, features: FineFeatures, e: bo
 {
 	if (alpha)
 	{
-		const abc = findExtended(e)
+		const abc = findExtended(e);
 		return {
 			f_3: !!1,
 			f_2: abc.d_2,
