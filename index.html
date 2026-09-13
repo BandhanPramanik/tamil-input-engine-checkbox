@@ -3,17 +3,29 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="govuk-files/govuk-frontend-6.4.0.min.css">
+	<title>Taravinyas Tamil Input Engine</title>
+	<link rel="stylesheet" type="text/css" href="css/pico.classless.zinc.min.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-	<div class="govuk-generic-header">
-	  <div class="govuk-generic-header__container govuk-width-container">
-	    <div class="govuk-generic-header__logo">
-	      <a href="#" class="govuk-generic-header__homepage-link">Taravinyas
-	      </a>
-	    </div>
-	  </div>
-	</div>
+	<header>
+		<h1>Taravinyas Tamil Input Engine</h1>
+	</header>
+	<main>
+		<nav aria-label="Modes">
+		  <button type="button" data-vowel-or-consonant-mode="vowel-mode" onclick="setMode(this.dataset.vowelOrConsonantMode)">Vowel</button>
+		  <button type="button" data-vowel-or-consonant-mode="consonant-mode" onclick="setMode(this.dataset.vowelOrConsonantMode)">Consonant</button>
+		</nav>
+		
+		<section id="vowel-section">
+			<h2>Vowel</h2>
+		</section>
+		
+		<section id="consonant-section" hidden>
+		 <h2>Consonant</h2> 
+		</section>	
+	</main>
+	<footer></footer>
+	<script src="scripts.js"></script>
 </body>
 </html>

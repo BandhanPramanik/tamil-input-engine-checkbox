@@ -1,8 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@100..900&display=swap');
-:root {
-	--inside-color: #333;	
-  --main-button-color: #A7A7A7; 
+
+[hidden] {
+  display: none !important;
+}
+
+nav {
+  max-width: 45em;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(200px, 1fr));
+  column-gap: 4em;
+  justify-content: start;
 }
 
 button:hover {
