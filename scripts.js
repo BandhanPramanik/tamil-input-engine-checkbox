@@ -48,7 +48,7 @@ function processFine(event, obj)
     const fineRadios = document.getElementsByName(event.target.name);
     if (event.target.name === "consonant-fine-position")
     {
-        if(event.target.id === "")
+        if(event.target.id === "consonant-fine-idaiyinam")
             return;
         // here
     }
