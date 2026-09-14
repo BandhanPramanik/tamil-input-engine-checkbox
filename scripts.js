@@ -46,5 +46,14 @@ function appearFine(event, obj)
 function processFine(event, obj)
 {
     const fineRadios = document.getElementsByName(event.target.name);
+    if (event.target.name === "consonant-fine-position")
+    {
+        if (event.target.
+    }
+    if (event.target.name === "vowel-fine-position")
+    {
+
+    }
+    if
     
 }
