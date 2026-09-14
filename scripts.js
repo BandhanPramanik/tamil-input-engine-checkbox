@@ -41,3 +41,9 @@ function appearFine(event, obj)
 	// for validity lines
 	const cluster = Number(event.target.value);
 }
+
+
+function processFine(event, obj)
+{
+
+}
