@@ -1,6 +1,7 @@
 const buttons = document.querySelectorAll("[data-vowel-or-consonant-mode]");
 const sections = document.querySelectorAll('[id$="-section"]');
 
+
 function setMode(vowelOrConsonantMode)
 {
 	if (vowelOrConsonantMode === "vowel-mode" && buttons[0].getAttribute("aria-pressed") === "true" ||
@@ -31,4 +32,12 @@ function setMode(vowelOrConsonantMode)
 	document.querySelectorAll(".fine-fieldset").forEach(section => section.hidden = true);
 }
 
+function appearFine(event, obj)
+{
+	// might not occur if 
+	// we are selecting coarse again after making fine appear
+	obj.nextElementSibling.hidden = false; 
 
+	// for validity lines
+	const cluster = Number(event.target.value);
+}

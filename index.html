@@ -32,26 +32,26 @@
 						Aytam/<span lang="ta" class="tamil-text">ஃ</span>
 					</label>
 				</fieldset>
-				<fieldset class="coarse-fieldset" onchange="this.nextElementSibling.hidden=false">
+				<fieldset class="coarse-fieldset" onchange="appearFine(event, this)">
 					<legend>Coarse position:</legend>
 					<label>
-						<input type="radio" name="coarse-position" id="vowel-a">
+						<input type="radio" name="coarse-position" value="0">
 						a/<span lang="ta" class="tamil-text">அ</span>
 					</label>
 					<label>
-						<input type="radio" name="coarse-position" id="vowel-i">
+						<input type="radio" name="coarse-position" value="1">
 						i/<span lang="ta" class="tamil-text">இ</span>
 					</label>
 					<label>
-						<input type="radio" name="coarse-position" id="vowel-u">
+						<input type="radio" name="coarse-position" value="2">
 						u/<span lang="ta" class="tamil-text">உ</span>
 					</label>
 					<label>
-						<input type="radio" name="coarse-position" id="vowel-E">
+						<input type="radio" name="coarse-position" value="4">
 						E/<span lang="ta" class="tamil-text">எ</span>
 					</label>
 					<label>
-						<input type="radio" name="coarse-position" id="vowel-O">
+						<input type="radio" name="coarse-position" value="5">
 						O/<span lang="ta" class="tamil-text">ஒ</span>
 					</label>
 				</fieldset>
@@ -85,30 +85,30 @@
 						ha/<span lang="ta" class="tamil-text">ஹ</span>
 					</label>
 				</fieldset>
-				<fieldset class="coarse-fieldset" onchange="this.nextElementSibling.hidden=false">
+				<fieldset class="coarse-fieldset" onchange="appearFine(event, this)">
 					<legend>Coarse position:</legend>
 					<label>
-						<input type="radio" name="coarse-position" id="consonant-ka">
+						<input type="radio" name="coarse-position" value="0">
 						ka/<span lang="ta" class="tamil-text">க</span> (Velar)
 					</label>
 					<label>
-						<input type="radio" name="coarse-position" id="consonant-ca">
+						<input type="radio" name="coarse-position" value="1">
 						ca/<span lang="ta" class="tamil-text">ச</span> (Palatal)
 					</label>
 					<label>
-						<input type="radio" name="coarse-position" id="consonant-Ta">
+						<input type="radio" name="coarse-position" value="2">
 						Ta/<span lang="ta" class="tamil-text">ட</span> (Retroflex)
 					</label>
 					<label>
-						<input type="radio" name="coarse-position" id="consonant-ta">
+						<input type="radio" name="coarse-position" value="3">
 						ta/<span lang="ta" class="tamil-text">த</span> (Dental)
 					</label>
 					<label>
-						<input type="radio" name="coarse-position" id="consonant-pa">
+						<input type="radio" name="coarse-position" value="4">
 						pa/<span lang="ta" class="tamil-text">ப</span> (Labial)
 					</label>
 					<label>
-						<input type="radio" name="coarse-position" id="consonant-r2a">
+						<input type="radio" name="coarse-position" value="5">
 						r2a/<span lang="ta" class="tamil-text">ற</span> (Alveolar)
 					</label>
 				</fieldset>
