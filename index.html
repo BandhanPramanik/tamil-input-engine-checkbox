@@ -55,7 +55,7 @@
 						O/<span lang="ta" class="tamil-text">ஒ</span>
 					</label>
 				</fieldset>
-				<fieldset class="fine-fieldset" hidden>
+				<fieldset class="fine-fieldset" onchange="processFine(event, this)" hidden>
 					<legend>Fine position:</legend>
 					<label>
 						<input type="radio" name="fine-position" id="vowel-fine-normal">
@@ -112,7 +112,7 @@
 						r2a/<span lang="ta" class="tamil-text">ற</span> (Alveolar)
 					</label>
 				</fieldset>
-				<fieldset class="fine-fieldset" hidden>
+				<fieldset class="fine-fieldset" onchange="processFine(event, this)" hidden>
 					<legend>Fine position:</legend>
 					<label>
 						<input type="radio" name="fine-position" id="consonant-fine-vallinam">
