@@ -45,5 +45,6 @@ function appearFine(event, obj)
 
 function processFine(event, obj)
 {
-
+    const fineRadios = document.getElementsByName(event.target.name);
+    
 }
