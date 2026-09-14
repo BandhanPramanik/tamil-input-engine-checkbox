@@ -1,91 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Taravinyas Tamil Input Engine</title>
-		<link rel="stylesheet" type="text/css" href="css/pico.classless.zinc.min.css">
-		<link rel="stylesheet" type="text/css" href="css/styles.css">
-	</head>
-	<body>
-		<header>
-			<h1>Taravinyas Tamil Input Engine</h1>
-		</header>
-		<main>
-			<form>
-				<fieldset id="mode-selection">
-					<legend>Vowel or Consonant</legend>
-					<button type="button" data-vowel-or-consonant-mode="vowel-mode" onclick="setMode(this.dataset.vowelOrConsonantMode)">Vowel</button>
-					<button type="button" data-vowel-or-consonant-mode="consonant-mode" onclick="setMode(this.dataset.vowelOrConsonantMode)">Consonant</button>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Taravinyas Tamil Input Engine</title>
+	<link rel="stylesheet" type="text/css" href="css/pico.classless.zinc.min.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+	<header>
+		<h1>Taravinyas Tamil Input Engine</h1>
+	</header>
+	<main>
+		<form>
+			<fieldset id="mode-selection">
+				<legend>Vowel or Consonant</legend>
+				<button type="button" data-vowel-or-consonant-mode="vowel-mode" onclick="setMode(this.dataset.vowelOrConsonantMode)">Vowel</button>
+				<button type="button" data-vowel-or-consonant-mode="consonant-mode" onclick="setMode(this.dataset.vowelOrConsonantMode)">Consonant</button>
+			</fieldset>
+
+			<section id="vowel-section">
+				<h2>Vowel</h2>
+				<fieldset class="extended-fieldset">
+					<legend>Extended letters:</legend>
+					<label>
+						<input type="radio" name="extended-letters" id="vowel-extended-pulli">
+						Pulli/<span lang="ta" class="tamil-text">்</span>
+					</label>
+					<label>
+						<input type="radio" name="extended-letters" id="vowel-extended-aytam">
+						Aytam/<span lang="ta" class="tamil-text">ஃ</span>
+					</label>
 				</fieldset>
+				<fieldset class="coarse-fieldset" onchange="this.nextElementSibling.hidden=false">
+					<legend>Coarse position:</legend>
+					<label>
+						<input type="radio" name="coarse-position" id="vowel-a">
+						a/<span lang="ta" class="tamil-text">அ</span>
+					</label>
+					<label>
+						<input type="radio" name="coarse-position" id="vowel-i">
+						i/<span lang="ta" class="tamil-text">இ</span>
+					</label>
+					<label>
+						<input type="radio" name="coarse-position" id="vowel-u">
+						u/<span lang="ta" class="tamil-text">உ</span>
+					</label>
+					<label>
+						<input type="radio" name="coarse-position" id="vowel-E">
+						E/<span lang="ta" class="tamil-text">எ</span>
+					</label>
+					<label>
+						<input type="radio" name="coarse-position" id="vowel-O">
+						O/<span lang="ta" class="tamil-text">ஒ</span>
+					</label>
+				</fieldset>
+				<fieldset class="fine-fieldset" hidden>
+					<legend>Fine position:</legend>
+					<label>
+						<input type="radio" name="fine-position" id="vowel-fine-normal">
+						Normal Monophthong
+					</label>
+					<label>
+						<input type="radio" name="fine-position" id="vowel-fine-contrastive">
+						Contrastive Monophthong
+					</label>
+					<label>
+						<input type="radio" name="fine-position" id="vowel-fine-diphthong">
+						Diphthong
+					</label>
+				</fieldset>
+			</section>
 
-				<section id="vowel-section">
-					<h2>Vowel</h2>
-					<fieldset>
-					  <legend>Coarse position:</legend>
-					  <label>
-					    <input type="radio" name="language">
-					    a/<span lang="ta" class="tamil-text">அ</span>
-					  </label>
-					  <label>
-					    <input type="radio" name="language">
-					    i/<span lang="ta" class="tamil-text">இ</span>
-					  </label>
-					  <label>
-					    <input type="radio" name="language">
-					    u/<span lang="ta" class="tamil-text">உ</span>
-					  </label>
-					  <label>
-					    <input type="radio" name="language">
-					    E/<span lang="ta" class="tamil-text">எ</span>
-					  </label>
-					  <label>
-					    <input type="radio" name="language">
-					    O/<span lang="ta" class="tamil-text">ஒ</span>
-					  </label>
-					</fieldset>
-				</section>
+			<section id="consonant-section" hidden>
+				<h2>Consonant</h2>
+				<fieldset class="extended-fieldset">
+					<legend>Extended letters:</legend>
+					<label>
+						<input type="radio" name="extended-letters" id="consonant-extended-ja">
+						ja/<span lang="ta" class="tamil-text">ஜ</span>
+					</label>
+					<label>
+						<input type="radio" name="extended-letters" id="consonant-extended-ha">
+						ha/<span lang="ta" class="tamil-text">ஹ</span>
+					</label>
+				</fieldset>
+				<fieldset class="coarse-fieldset" onchange="this.nextElementSibling.hidden=false">
+					<legend>Coarse position:</legend>
+					<label>
+						<input type="radio" name="coarse-position" id="consonant-ka">
+						ka/<span lang="ta" class="tamil-text">க</span> (Velar)
+					</label>
+					<label>
+						<input type="radio" name="coarse-position" id="consonant-ca">
+						ca/<span lang="ta" class="tamil-text">ச</span> (Palatal)
+					</label>
+					<label>
+						<input type="radio" name="coarse-position" id="consonant-Ta">
+						Ta/<span lang="ta" class="tamil-text">ட</span> (Retroflex)
+					</label>
+					<label>
+						<input type="radio" name="coarse-position" id="consonant-ta">
+						ta/<span lang="ta" class="tamil-text">த</span> (Dental)
+					</label>
+					<label>
+						<input type="radio" name="coarse-position" id="consonant-pa">
+						pa/<span lang="ta" class="tamil-text">ப</span> (Labial)
+					</label>
+					<label>
+						<input type="radio" name="coarse-position" id="consonant-r2a">
+						r2a/<span lang="ta" class="tamil-text">ற</span> (Alveolar)
+					</label>
+				</fieldset>
+				<fieldset class="fine-fieldset" hidden>
+					<legend>Fine position:</legend>
+					<label>
+						<input type="radio" name="fine-position" id="consonant-fine-vallinam">
+						Vallinam
+					</label>
+					<label>
+						<input type="radio" name="fine-position" id="consonant-fine-mellinam">
+						Mellinam
+					</label>
+					<label>
+						<input type="radio" name="fine-position" id="consonant-fine-idaiyinam">
+						Idaiyinam
+						<div class="idaiyinam-nested-options">
+							<label>
+								<input type="radio" name="fine-idaiyinam-position" id="consonant-fine-idaiyinam-approximant">
+								Approximant (ra, ர / Zha, ழ)
+							</label>
+							<label>
+								<input type="radio" name="fine-idaiyinam-position" id="consonant-fine-idaiyinam-lateral">
+								Lateral (la, ல / La, ள)
+							</label>
+						</div>
+					</label>
 
-				<section id="consonant-section" hidden>
-					<h2>Consonant</h2>
-					<fieldset>
-					  <legend>Coarse position:</legend>
-					  <label>
-					    <input type="radio" name="language">
-					    ka/<span lang="ta" class="tamil-text">க</span> (Velar)
-					  </label>
-					  <label>
-					    <input type="radio" name="language">
-					    ca/<span lang="ta" class="tamil-text">ச</span> (Palatal)
-					  </label>
-					  <label>
-					    <input type="radio" name="language">
-					    Ta/<span lang="ta" class="tamil-text">ட</span> (Retroflex)
-					  </label>
-					  <label>
-					    <input type="radio" name="language">
-					    ta/<span lang="ta" class="tamil-text">த</span> (Dental)
-					  </label>
-					  <label>
-					    <input type="radio" name="language">
-					    pa/<span lang="ta" class="tamil-text">ப</span> (Labial)
-					  </label>
-					  <label>
-					    <input type="radio" name="language">
-					    r2a/<span lang="ta" class="tamil-text">ற</span> (Alveolar)
-					  </label>
-					</fieldset>
-				</section>	
-			</form>
-			<textarea 
-				name="result" 
-				lang="ta" 
-				class="tamil-text"
-				rows=6
-				placeholder="What you select is written here..." 
-				aria-label="Text Buffer Result"></textarea>
-		</main>
-		<footer></footer>
-		<script src="scripts.js"></script>
-	</body>
+					<label>
+						<input type="radio" name="fine-position" id="consonant-fine-sibilant">
+						Sibilant [Grantha]
+					</label>
+				</fieldset>
+			</section>	
+		</form>
+		<textarea 
+		name="result" 
+		lang="ta" 
+		class="tamil-text"
+		rows=6
+		placeholder="What you select is written here..." 
+		aria-label="Text Buffer Result"></textarea>
+	</main>
+	<footer></footer>
+	<script src="scripts.js"></script>
+</body>
 </html>

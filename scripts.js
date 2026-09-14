@@ -3,11 +3,14 @@ const sections = document.querySelectorAll('[id$="-section"]');
 
 function setMode(vowelOrConsonantMode)
 {
+	if (vowelOrConsonantMode === "vowel-mode" && buttons[0].getAttribute("aria-pressed") === "true" ||
+		vowelOrConsonantMode === "consonant-mode" && buttons[1].getAttribute("aria-pressed") === "true")
+		return;
+
 	buttons[0].setAttribute(
 			"aria-pressed",
 			buttons[0].dataset.vowelOrConsonantMode === vowelOrConsonantMode
 		);
-
 	buttons[1].setAttribute(
 			"aria-pressed",
 			buttons[1].dataset.vowelOrConsonantMode === vowelOrConsonantMode
@@ -24,6 +27,8 @@ function setMode(vowelOrConsonantMode)
 		section.querySelectorAll('input[type="radio"]')
 		.forEach(radio => radio.checked = false);
 	});
+
+	document.querySelectorAll(".fine-fieldset").forEach(section => section.hidden = true);
 }
 
 
