@@ -45,19 +45,20 @@ function appearFine(event, obj)
 
 function processFine(event, obj)
 {
-    const fineRadios = document.getElementsByName(event.target.name);
     if (event.target.name === "consonant-fine-position")
     {
+        const fineRadios = document.getElementsByName(event.target.name);
         if(event.target.id === "consonant-fine-idaiyinam")
             return;
-        // here
+        const checked = [...fineRadios].map(radio => radio.checked);
     }
     if (event.target.name === "fine-idaiyinam-position")
     {
-        // here
+        const value = event.target.value === "true";
     }
     if (event.target.name === "vowel-fine-position")
     {
-        // here
+        const fineRadios = document.getElementsByName(event.target.name);
+        const checked = [...fineRadios].map(radio => radio.checked);
     }   
 }
