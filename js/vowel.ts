@@ -1,4 +1,5 @@
-type VowelGroup = 0 | 1 | 2 | 4 | 5; // 3 has been omitted to make calculations easier
+type VowelGroup = "0" | "1" | "2" | "4" | "5"; // 3 has been omitted to make calculations easier
+type FineFeaturesDec = "0" | "1" | "2";
 
 interface VowelGroupPosition {
 	gamma_2: boolean,
@@ -20,9 +21,13 @@ interface FineFeatures {
 	m: boolean;	
 }
 
-function rewriteVowelGroupPosition(vg: VowelGroup): VowelGroupPosition
+// input processing
+export function rewriteVowelGroupPosition(vg: VowelGroup): VowelGroupPosition
 {
-	let bin = vg.toString(2).padStart(3, '0');
+	let bin = Number(vg).toString(2).padStart(3, '0');
+	// think of the digit placement as normal units place, tens place
+	// then, because the most significant digit is at the 0th index,
+	// reverse the count.
 	return {
 		gamma_2: bin[0] === "1",
 		gamma_1: bin[1] === "1",
@@ -30,17 +35,28 @@ function rewriteVowelGroupPosition(vg: VowelGroup): VowelGroupPosition
 	};
 } 
 
-function findInvalidV({v_h}: CoarseValidity, {h, m}: FineFeatures, t: boolean): boolean
+// input processing
+export function rewriteFineFeatures(fd: FineFeaturesDec): FineFeatures
+{
+	let bin = Number(fd).toString(2).padStart(2, '0');
+	// think of the digit placement as normal units place, tens place
+	// then, because the most significant digit is at the 0th index,
+	// reverse the count.
+	return {
+		h: bin[0] === "1",
+		m: bin[1] === "1"
+	}
+}
+
+function findInvalidV({v_h}: CoarseValidity, {h, m}: FineFeatures): boolean
 {
 	// Either there's no diphthong for that vowel group(v_h = 0),
 	// or the contrastive monophthong (m) switch is already flicked.
 	const isDiphthongForbidden = h && (!v_h || m);
-	// Check if we are using the Extended Mode or the Normal mode
-	const isExtended = t;
-	return isDiphthongForbidden || isExtended;
+	return isDiphthongForbidden;
 }
 
-function findCoarseValidity({gamma_2}: VowelGroupPosition): CoarseValidity
+export function findCoarseValidity({gamma_2}: VowelGroupPosition): CoarseValidity
 {
 	const v_h = gamma_2;
 	return {v_h};

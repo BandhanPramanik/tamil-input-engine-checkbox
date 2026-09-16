@@ -1,4 +1,4 @@
-type Cluster = 0 | 1 | 2 | 3 | 4 | 5;
+type Cluster = "0" | "1" | "2" | "3" | "4" | "5";
 
 interface ClusterPosition {
 	c_2: boolean,
@@ -26,9 +26,13 @@ interface FineFeatures {
 	v: boolean	
 }
 
-function rewriteClusterPosition(clus: Cluster): ClusterPosition
+// input processsing
+export function rewriteClusterPosition(clus: Cluster): ClusterPosition
 {
-	let bin = clus.toString(2).padStart(3, '0');
+	let bin = Number(clus).toString(2).padStart(3, '0');
+	// think of the digit placement as normal units place, tens place
+	// then, because the most significant digit is at the 0th index,
+	// reverse the count.
 	return {
 		c_2: bin[0] === "1",
 		c_1: bin[1] === "1",
@@ -36,7 +40,7 @@ function rewriteClusterPosition(clus: Cluster): ClusterPosition
 	};
 } 
 
-function findInvalidD({c_i1, c_i0, c_s}: CoarseValidity, {s, i_1, i_0, m, v}: FineFeatures, alpha: boolean): boolean
+function findInvalidD({c_i1, c_i0, c_s}: CoarseValidity, {s, i_1, i_0, m, v}: FineFeatures): boolean
 {
 	// C_I, used for consonant validity has only three states: 00, 01, 10.
 	const isCIShowing11 = c_i1 && c_i0;
@@ -55,15 +59,13 @@ function findInvalidD({c_i1, c_i0, c_s}: CoarseValidity, {s, i_1, i_0, m, v}: Fi
 	const isSibilantForbidden = s && !c_s;
 	// No switches flicked. Simple as that.
 	const areSwitchesFlicked = !i_0 && !m && !s && !v;
-	// Check if we are using the Extended Mode or the Normal mode
-	const isExtended = alpha;
 	return isCIShowing11 || isIdaiyinamAndMellinam || isIdaiyinamAndSibilant ||
 	isIdaiyinamAndVallinam || isMellinamAndSibilant || isMellinamAndVallinam ||
 	isSibilantAndVallinam || isI1BlockingI0 || isSibilantForbidden ||
-	areSwitchesFlicked || isExtended;
+	areSwitchesFlicked;
 }
 
-function findCoarseValidity({c_2, c_1, c_0}: ClusterPosition): CoarseValidity
+export function findCoarseValidity({c_2, c_1, c_0}: ClusterPosition): CoarseValidity
 {
 	const c_i1 = (c_2 !== c_1) && (c_1 !== c_0);
 	const c_i0 = !c_1 && (c_2 !== c_0); 
@@ -136,12 +138,3 @@ function evalD(invalid_d: boolean, alpha: boolean, features: FineFeatures, e: bo
 			f_0: !!1
 		};
 }
-/*
-		const abc: FinePositions = {
-			s: s,
-			i_1: i_1,
-			i_0: i_0,
-			m: m,
-			v: v
-		};
-*/

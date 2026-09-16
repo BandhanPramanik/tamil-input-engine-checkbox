@@ -53,15 +53,12 @@ form, textarea {
   font-family: Noto Sans Tamil;
 }
 
-.idaiyinam-nested-options
+#idaiyinam-nested-options
 {
-  display: none;
   margin-top: calc(var(--pico-spacing) * .375); /* same formula as the one pico.css itself uses */
   margin-left: 2em;
 }
-#consonant-fine-idaiyinam:checked ~ .idaiyinam-nested-options {
-  display: block;
-}
+
 
 @media (min-width: 600px) {
   body {
