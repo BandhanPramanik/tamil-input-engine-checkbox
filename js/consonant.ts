@@ -112,7 +112,7 @@ interface NormalWorld
 {
 	kind: "normal",
 	features: FineFeatures,
-	invalid_d: boolean
+	validity: CoarseValidity
 }
 
 interface ExtendedWorld
@@ -135,8 +135,16 @@ function evalD(alpha: boolean, world: World): Position
 			f_0: abc.d_0
 		};
 	}
-	else if (!alpha && world.kind === "normal" && !world.invalid_d)
+	else if (!alpha && world.kind === "normal")
 	{
+		const invalid_d = findInvalidD(world.validity, world.features);	
+		if (invalid_d)
+			return {
+				f_3: !!0,
+				f_2: !!1,
+				f_1: !!1,
+				f_0: !!1
+			};
 		const abc = findFinePositions(world.features);
 		return {
 			f_3: !!1,

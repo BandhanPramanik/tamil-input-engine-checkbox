@@ -86,13 +86,27 @@ interface Position
 	f_0: boolean
 }
 
+interface NormalWorld
+{
+	kind: "normal",
+	features: FineFeatures,
+	validity: CoarseValidity,
+	xi: boolean
+}
 
+interface ExtendedWorld
+{
+	kind: "extended",
+	e: boolean
+}
 
-function evalV(invalid_v: boolean, t: boolean, xi: boolean, features: FineFeatures, e: boolean): Position
+type World = NormalWorld | ExtendedWorld;
+
+function evalV(t: boolean, world: World): Position
 {
 	if (t)
 	{
-		const abc = findExtended(e);
+		const abc = findExtended(world.e);
 		return {
 			f_3: !!1,
 			f_2: !!0,
@@ -100,12 +114,20 @@ function evalV(invalid_v: boolean, t: boolean, xi: boolean, features: FineFeatur
 			f_0: abc.s_0
 		};
 	}
-	else if (!t && !invalid_v)
+	else if (!t)
 	{
-		const abc = findFinePositions(features);
+		const invalid_v = findInvalidV(world.validity, world.features);
+		if (invalid_v)
+			return {
+				f_3: !!0,
+				f_2: !!1,
+				f_1: !!1,
+				f_0: !!1		
+			};
+		const abc = findFinePositions(world.features);
 		return {
 			f_3: !!0,
-			f_2: xi,
+			f_2: world.xi,
 			f_1: abc.s_1,
 			f_0: abc.s_0
 		};
