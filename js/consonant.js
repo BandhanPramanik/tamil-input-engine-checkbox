@@ -61,9 +61,9 @@ function findExtended(e) {
             d_0: !!0
         };
 }
-function evalD(invalid_d, alpha, features, e) {
-    if (alpha) {
-        const abc = findExtended(e);
+export function evalD(alpha, world) {
+    if (alpha && world.kind === "extended") {
+        const abc = findExtended(world.e);
         return {
             f_3: !!1,
             f_2: abc.d_2,
@@ -71,8 +71,16 @@ function evalD(invalid_d, alpha, features, e) {
             f_0: abc.d_0
         };
     }
-    else if (!alpha && !invalid_d) {
-        const abc = findFinePositions(features);
+    else if (!alpha && world.kind === "normal") {
+        const invalid_d = findInvalidD(world.validity, world.features);
+        if (invalid_d)
+            return {
+                f_3: !!0,
+                f_2: !!1,
+                f_1: !!1,
+                f_0: !!1
+            };
+        const abc = findFinePositions(world.features);
         return {
             f_3: !!1,
             f_2: abc.d_2,

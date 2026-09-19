@@ -102,9 +102,9 @@ interface ExtendedWorld
 
 type World = NormalWorld | ExtendedWorld;
 
-function evalV(t: boolean, world: World): Position
+export function evalV(t: boolean, world: World): Position
 {
-	if (t)
+	if (t && world.kind === "extended")
 	{
 		const abc = findExtended(world.e);
 		return {
@@ -114,7 +114,7 @@ function evalV(t: boolean, world: World): Position
 			f_0: abc.s_0
 		};
 	}
-	else if (!t)
+	else if (!t && world.kind === "normal")
 	{
 		const invalid_v = findInvalidV(world.validity, world.features);
 		if (invalid_v)

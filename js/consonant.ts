@@ -123,7 +123,7 @@ interface ExtendedWorld
 
 type World = NormalWorld | ExtendedWorld;
 
-function evalD(alpha: boolean, world: World): Position
+export function evalD(alpha: boolean, world: World): Position
 {
 	if (alpha && world.kind === "extended")
 	{
