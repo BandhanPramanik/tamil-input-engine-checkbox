@@ -22,13 +22,11 @@ interface Position {
     f_0: boolean;
 }
 interface NormalWorld {
-    kind: "normal";
     features: FineFeatures;
     validity: CoarseValidity;
     xi: boolean;
 }
 interface ExtendedWorld {
-    kind: "extended";
     e: boolean;
 }
 type World = NormalWorld | ExtendedWorld;

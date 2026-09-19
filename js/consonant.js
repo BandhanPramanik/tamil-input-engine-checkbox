@@ -62,7 +62,7 @@ function findExtended(e) {
         };
 }
 export function evalD(alpha, world) {
-    if (alpha && world.kind === "extended") {
+    if (alpha && "e" in world) {
         const abc = findExtended(world.e);
         return {
             f_3: !!1,
@@ -71,7 +71,7 @@ export function evalD(alpha, world) {
             f_0: abc.d_0
         };
     }
-    else if (!alpha && world.kind === "normal") {
+    else if (!alpha && "features" in world) {
         const invalid_d = findInvalidD(world.validity, world.features);
         if (invalid_d)
             return {

@@ -45,7 +45,7 @@ function findExtended(e) {
     };
 }
 export function evalV(t, world) {
-    if (t && world.kind === "extended") {
+    if (t && "e" in world) {
         const abc = findExtended(world.e);
         return {
             f_3: !!1,
@@ -54,7 +54,7 @@ export function evalV(t, world) {
             f_0: abc.s_0
         };
     }
-    else if (!t && world.kind === "normal") {
+    else if (!t && "features" in world) {
         const invalid_v = findInvalidV(world.validity, world.features);
         if (invalid_v)
             return {

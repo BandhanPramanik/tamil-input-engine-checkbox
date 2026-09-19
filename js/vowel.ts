@@ -88,7 +88,6 @@ interface Position
 
 interface NormalWorld
 {
-	kind: "normal",
 	features: FineFeatures,
 	validity: CoarseValidity,
 	xi: boolean
@@ -96,7 +95,6 @@ interface NormalWorld
 
 interface ExtendedWorld
 {
-	kind: "extended",
 	e: boolean
 }
 
@@ -104,7 +102,7 @@ type World = NormalWorld | ExtendedWorld;
 
 export function evalV(t: boolean, world: World): Position
 {
-	if (t && world.kind === "extended")
+	if (t && "e" in world)
 	{
 		const abc = findExtended(world.e);
 		return {
@@ -114,7 +112,7 @@ export function evalV(t: boolean, world: World): Position
 			f_0: abc.s_0
 		};
 	}
-	else if (!t && world.kind === "normal")
+	else if (!t && "features" in world)
 	{
 		const invalid_v = findInvalidV(world.validity, world.features);
 		if (invalid_v)
