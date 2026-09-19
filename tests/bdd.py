@@ -1,4 +1,4 @@
-# AI-extracted code, except the expressions
+# Vibecoded, except the expressions
 from dd import autoref
 
 bdd = cudd.BDD()
