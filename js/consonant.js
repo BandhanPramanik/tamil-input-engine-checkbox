@@ -20,6 +20,10 @@ function findInvalidD({ c_i1, c_i0, c_s }, { s, i_1, i_0, m, v }) {
     const isMellinamAndSibilant = m && s;
     const isMellinamAndVallinam = m && v;
     const isSibilantAndVallinam = s && v;
+    // I_1 only allowed when C_I1 = 1	
+    const isI1Forbidden = i_1 && !c_i1;
+    // I_0 only allowed when C_I = 01 or 10
+    const isI0Forbidden = i_0 && !c_i0 && !c_i1;
     // Three states for Idaiyinam: 00 (for C_I = 00), 01, and 11. 
     // Note that C_I0 is always 1 when C_I is not 00. 
     // I_1 can't be flicked when I_0 = 0.
@@ -30,8 +34,8 @@ function findInvalidD({ c_i1, c_i0, c_s }, { s, i_1, i_0, m, v }) {
     const areSwitchesFlicked = !i_0 && !m && !s && !v;
     return isCIShowing11 || isIdaiyinamAndMellinam || isIdaiyinamAndSibilant ||
         isIdaiyinamAndVallinam || isMellinamAndSibilant || isMellinamAndVallinam ||
-        isSibilantAndVallinam || isI1BlockingI0 || isSibilantForbidden ||
-        areSwitchesFlicked;
+        isSibilantAndVallinam || isI1Forbidden || isI0Forbidden ||
+        isI1BlockingI0 || isSibilantForbidden || areSwitchesFlicked;
 }
 export function findCoarseValidity({ c_2, c_1, c_0 }) {
     const c_i1 = (c_2 !== c_1) && (c_1 !== c_0);
