@@ -40,8 +40,8 @@ for i, final_expr in enumerate(sop_d):
     print("D" + str(i) + " =", simplify_logic(final_expr, dontcare=dontcare_expr))
 
 # change these lines to include what's allowed
-coarse = expr | ((ci1 ^ ci0) & i0) | (ci1 & ~ci0 & i0 & i1) # can be
-coarse &= ~(ci1 & ci0) & ~(~cs & s) # cannot be
+coarse = expr & (~i0 | (ci1 ^ ci0)) & (~i1 | (i0 & (ci1 & ~ci0)))
+coarse &= ~(ci1 & ci0) & (~s | cs) & Exclusive(s, i0, m, v)
 
 
 invalid_all = Not(coarse)
