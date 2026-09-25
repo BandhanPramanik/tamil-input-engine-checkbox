@@ -8,7 +8,7 @@ def find_minterms(output, minterms, length_output):
     for i in range(length_output):
         output_bits.append([])
         for j in output:
-            output_bits[i].append((j&(2**i))>>i)
+            output_bits[i].append((j >> i) & 1)
 
     minterms_d = []
     for i in range(length_output):
