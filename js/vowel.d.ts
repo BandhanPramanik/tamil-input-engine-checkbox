@@ -27,7 +27,8 @@ interface NormalWorld {
     xi: boolean;
 }
 interface ExtendedWorld {
-    e: boolean;
+    e1: boolean;
+    e0: boolean;
 }
 type World = NormalWorld | ExtendedWorld;
 export declare function evalV(t: boolean, world: World): Position;

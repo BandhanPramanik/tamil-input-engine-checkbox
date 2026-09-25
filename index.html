@@ -18,82 +18,102 @@
 				<button type="button" data-vowel-or-consonant-mode="vowel-mode" onclick="setMode(this.dataset.vowelOrConsonantMode)">Vowel</button>
 				<button type="button" data-vowel-or-consonant-mode="consonant-mode" onclick="setMode(this.dataset.vowelOrConsonantMode)">Consonant</button>
 			</fieldset>
-
 			<section id="vowel-section">
 				<h2>Vowel</h2>
-				<fieldset class="extended-fieldset">
-					<legend>Extended letters:</legend>
-					<label>
-						<input type="radio" name="extended-letters">
-						Pulli/<span lang="ta" class="tamil-text">்</span>
-					</label>
-					<label>
-						<input type="radio" name="extended-letters">
-						Aytam/<span lang="ta" class="tamil-text">ஃ</span>
-					</label>
-
-					<label>
-						<input type="radio" name="extended-letters">
-						ZWNJ (used to separate conjuncts)
-					</label>
+				<fieldset class="alpha-fieldset" onchange="processAlpha(event)">
+					<input type="checkbox" id="vowel-alpha-checkbox">
+					<label htmlFor="vowel-alpha-checkbox">Use the extended mode</label>
 				</fieldset>
-				<fieldset class="coarse-fieldset" onchange="appearFine(event, this)">
-					<legend>Coarse position:</legend>
-					<label>
-						<input type="radio" name="vowel-coarse-position" value="0">
-						a/<span lang="ta" class="tamil-text">அ</span>
-					</label>
-					<label>
-						<input type="radio" name="vowel-coarse-position" value="1">
-						i/<span lang="ta" class="tamil-text">இ</span>
-					</label>
-					<label>
-						<input type="radio" name="vowel-coarse-position" value="2">
-						u/<span lang="ta" class="tamil-text">உ</span>
-					</label>
-					<label>
-						<input type="radio" name="vowel-coarse-position" value="4">
-						E/<span lang="ta" class="tamil-text">எ</span>
-					</label>
-					<label>
-						<input type="radio" name="vowel-coarse-position" value="5">
-						O/<span lang="ta" class="tamil-text">ஒ</span>
-					</label>
-				</fieldset>
-				<fieldset class="fine-fieldset" onchange="processFine(event)" hidden>
-					<legend>Fine position:</legend>
-					<label>
-						<input type="radio" name="vowel-fine-position" value="0">
-						Normal Monophthong
-					</label>
-					<label>
-						<input type="radio" name="vowel-fine-position" value="1">
-						Contrastive Monophthong
-					</label>
-					<label>
-						<input type="radio" name="vowel-fine-position" value="2">
-						Diphthong
-					</label>
-				</fieldset>
+				<section id="vowel-extended-section" hidden>
+					<fieldset class="extended-fieldset" onchange="processExtended(event)">
+						<legend>Extended letters:</legend>
+						<label>
+							<input type="radio" name="vowel-extended-letters" value="0">
+							Pulli/<span lang="ta" class="tamil-text">்</span>
+						</label>
+						<label>
+							<input type="radio" name="vowel-extended-letters" value="1">
+							Aytam/<span lang="ta" class="tamil-text">ஃ</span>
+						</label>
+						<label>
+							<input type="radio" name="vowel-extended-letters" value="2">
+							ZWNJ (used to separate conjuncts)
+						</label>
+					</fieldset>
+				</section>
+				<section id="vowel-normal-section">
+					<fieldset class="coarse-fieldset" onchange="appearFine(event, this)">
+						<legend>Coarse position:</legend>
+						<label>
+							<input type="radio" name="vowel-coarse-position" value="0">
+							a/<span lang="ta" class="tamil-text">அ</span>
+						</label>
+						<label>
+							<input type="radio" name="vowel-coarse-position" value="1">
+							i/<span lang="ta" class="tamil-text">இ</span>
+						</label>
+						<label>
+							<input type="radio" name="vowel-coarse-position" value="2">
+							u/<span lang="ta" class="tamil-text">உ</span>
+						</label>
+						<label>
+							<input type="radio" name="vowel-coarse-position" value="4">
+							E/<span lang="ta" class="tamil-text">எ</span>
+						</label>
+						<label>
+							<input type="radio" name="vowel-coarse-position" value="5">
+							O/<span lang="ta" class="tamil-text">ஒ</span>
+						</label>
+					</fieldset>
+					<fieldset class="fine-fieldset" onchange="processFine(event)" hidden>
+						<legend>Fine position:</legend>
+						<label>
+							<input type="radio" name="vowel-fine-position" value="0">
+							Normal Monophthong
+						</label>
+						<label>
+							<input type="radio" name="vowel-fine-position" value="1">
+							Contrastive Monophthong
+						</label>
+						<label>
+							<input type="radio" name="vowel-fine-position" value="2">
+							Diphthong
+						</label>
+					</fieldset>
+					<fieldset class="diacritic-fieldset" onchange="processDiacritic(event)">
+						<legend>Diacritic or Standalone Vowel:</legend>
+						<input type="radio" id="standalone-vowel" name="vowel-diacritic" value="0">
+						<label htmlFor="standalone-vowel">Standalone</label>
+						<input type="radio" id="diacritic-vowel" name="vowel-diacritic" value="1">
+						<label htmlFor="diacritic-vowel">Diacritic</label>
+					</fieldset>
+				</section>
 			</section>
 
 			<section id="consonant-section" hidden>
+				<fieldset class="alpha-fieldset" onchange="processAlpha(event)">
+					<input type="checkbox" id="consonant-alpha-checkbox">
+					<label htmlFor="consonant-alpha-checkbox">Use the extended mode</label>
+				</fieldset>
 				<h2>Consonant</h2>
-				<fieldset class="extended-fieldset">
+				<section id="consonant-extended-section" hidden>
+				<fieldset class="extended-fieldset" onchange="processExtended(event)">
 					<legend>Extended letters:</legend>
 					<label>
-						<input type="radio" name="extended-letters">
+						<input type="radio" name="consonant-extended-letters" value="0">
 						ja/<span lang="ta" class="tamil-text">ஜ</span>
 					</label>
 					<label>
-						<input type="radio" name="extended-letters">
+						<input type="radio" name="consonant-extended-letters" value="1">
 						ha/<span lang="ta" class="tamil-text">ஹ</span>
 					</label>
 					<label>
-						<input type="radio" name="extended-letters">
+						<input type="radio" name="consonant-extended-letters" value="2">
 						kSa/<span lang="ta" class="tamil-text">க்ஷ்</span>
 					</label>
 				</fieldset>
+			</section>	
+				<section id="consonant-normal-section">
 				<fieldset class="coarse-fieldset" onchange="appearFine(event, this)">
 					<legend>Coarse position:</legend>
 					<label>

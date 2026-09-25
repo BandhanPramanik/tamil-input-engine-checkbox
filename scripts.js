@@ -1,6 +1,6 @@
 const buttons = document.querySelectorAll("[data-vowel-or-consonant-mode]");
 const sections = document.querySelectorAll('[id$="-section"]');
-let coarseValidity, fineFeatures, isIdaiyinamSubAppearing;
+let cluster, coarseValidity, fineFeatures, isIdaiyinamSubAppearing, pos;
 
 function setMode(vowelOrConsonantMode)
 {
@@ -49,7 +49,7 @@ function hideIdaiyinamSubOptions()
 async function appearFine(event, obj)
 {
     // for validity lines
-    const cluster = Number(event.target.value);
+    cluster = event.target.value;
     if (event.target.name === "consonant-coarse-position")
     {
         const { rewriteClusterPosition, findCoarseValidity } = await import("./js/consonant.js");
@@ -85,6 +85,19 @@ async function appearFine(event, obj)
     obj.nextElementSibling.hidden = false; 
 }
 
+function processAlpha(event)
+{
+   if (event.target.id === "vowel-alpha-checkbox")
+   {
+       document.getElementById("vowel-normal-section").hidden = event.target.checked;
+       document.getElementById("vowel-extended-section").hidden = !event.target.checked;
+   } 
+   if (event.target.id === "consonant-alpha-checkbox")
+   {
+       document.getElementById("consonant-normal-section").hidden = event.target.checked;
+       document.getElementById("consonant-extended-section").hidden = !event.target.checked;
+   } 
+}
 
 async function processFine(event)
 {
@@ -107,6 +120,12 @@ async function processFine(event)
            m: checked[1],
            v: checked[0]
         };
+        world = {
+           features: fineFeatures,
+           validity: coarseValidity 
+        }
+        const { evalD } = await import("./js/consonant.js");
+        pos = evalD(false, world);
     }
     // Consonant Idaiyinam
     if (event.target.name === "fine-idaiyinam-position")
@@ -120,7 +139,12 @@ async function processFine(event)
            m: checked[1],
            v: checked[0]
         };
-
+        const world = {
+           features: fineFeatures,
+           validity: coarseValidity 
+        }
+        const { evalD } = await import("./js/consonant.js");
+        pos = evalD(false, world);
     }
     // Vowel
     if (event.target.name === "vowel-fine-position")
@@ -132,3 +156,33 @@ async function processFine(event)
     }
 }
 
+async function processDiacritic(event)
+{
+    const diacriticValue = Number(event.target.value);
+    const world = {
+       features: fineFeatures,
+       validity: coarseValidity,
+       xi: diacriticValue
+    };
+    const { evalV } = await import("./js/vowel.js");
+    pos = evalV(false, world);
+}
+
+async function processExtended(event)
+{
+    const extendedValue = Number(event.target.value);
+    const world = {
+        e1: ((extendedValue >> 1) & 1) == 1,
+        e0: (extendedValue & 1) == 1
+    }
+    if (event.target.name === "vowel-extended-letters")
+    {
+        const { evalV } = await import("./js/vowel.js");
+        pos = evalV(true, world);
+    }
+    if (event.target.name === "consonant-extended-letters")
+    {
+        const { evalD } = await import("./js/consonant.js");
+        pos = evalD(true, world);
+    }
+}

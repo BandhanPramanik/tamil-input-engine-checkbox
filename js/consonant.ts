@@ -80,28 +80,12 @@ export function findCoarseValidity({c_2, c_1, c_0}: ClusterPosition): CoarseVali
 
 function findFinePositions({s, i_1, i_0, m, v}: FineFeatures): FinePositions
 {
-	// Here, we are already assuming that the coarse stuff is valid and this whole thing is valid
+	// Here, we are already assuming that the coarse stuff is valid
 	return {
 		d_2: s,
 		d_1: i_1,
 		d_0: m || i_1
 	};
-}
-
-function findExtended(e:boolean): FinePositions
-{
-	if (!e)
-		return {
-			d_2: !!1,
-			d_1: !!0,
-			d_0: !!1
-		}
-	else
-		return {
-			d_2: !!1,
-			d_1: !!1,
-			d_0: !!0
-		}
 }
 
 interface Position
@@ -120,21 +104,21 @@ interface NormalWorld
 
 interface ExtendedWorld
 {
-	e: boolean
+	e1: boolean,
+	e0: boolean
 }
 
 type World = NormalWorld | ExtendedWorld;
 
 export function evalD(alpha: boolean, world: World): Position
 {
-	if (alpha && "e" in world)
+	if (alpha && "e0" in world)
 	{
-		const abc = findExtended(world.e);
 		return {
 			f_3: !!1,
-			f_2: abc.d_2,
-			f_1: abc.d_1,
-			f_0: abc.d_0
+			f_2: !!0,
+			f_1: world.e1,
+			f_0: world.e0
 		};
 	}
 	else if (!alpha && "features" in world)

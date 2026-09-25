@@ -70,13 +70,6 @@ function findFinePositions({h, m}: FineFeatures): FinePositions
 		s_0: m
 	};
 }
-function findExtended(e:boolean): FinePositions
-{
-	return {
-		s_1: !!0,
-		s_0: e
-	};
-}
 
 interface Position
 {
@@ -95,21 +88,21 @@ interface NormalWorld
 
 interface ExtendedWorld
 {
-	e: boolean
+	e1: boolean,
+	e0: boolean
 }
 
 type World = NormalWorld | ExtendedWorld;
 
 export function evalV(t: boolean, world: World): Position
 {
-	if (t && "e" in world)
+	if (t && "e0" in world)
 	{
-		const abc = findExtended(world.e);
 		return {
 			f_3: !!1,
 			f_2: !!0,
-			f_1: abc.s_1,
-			f_0: abc.s_0
+			f_1: world.e1,
+			f_0: world.e0
 		};
 	}
 	else if (!t && "features" in world)
@@ -120,7 +113,7 @@ export function evalV(t: boolean, world: World): Position
 				f_3: !!0,
 				f_2: !!1,
 				f_1: !!1,
-				f_0: !!1		
+				f_0: !!1
 			};
 		const abc = findFinePositions(world.features);
 		return {

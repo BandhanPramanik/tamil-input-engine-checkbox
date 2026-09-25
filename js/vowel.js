@@ -38,20 +38,13 @@ function findFinePositions({ h, m }) {
         s_0: m
     };
 }
-function findExtended(e) {
-    return {
-        s_1: !!0,
-        s_0: e
-    };
-}
 export function evalV(t, world) {
-    if (t && "e" in world) {
-        const abc = findExtended(world.e);
+    if (t && "e0" in world) {
         return {
             f_3: !!1,
             f_2: !!0,
-            f_1: abc.s_1,
-            f_0: abc.s_0
+            f_1: world.e1,
+            f_0: world.e0
         };
     }
     else if (!t && "features" in world) {
