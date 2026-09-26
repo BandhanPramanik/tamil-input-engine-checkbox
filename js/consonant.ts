@@ -116,7 +116,7 @@ export function evalD(alpha: boolean, world: World): Position
 	{
 		return {
 			f_3: !!1,
-			f_2: !!0,
+			f_2: !!1,
 			f_1: world.e1,
 			f_0: world.e0
 		};
@@ -133,7 +133,7 @@ export function evalD(alpha: boolean, world: World): Position
 			};
 		const abc = findFinePositions(world.features);
 		return {
-			f_3: !!1,
+			f_3: !!0,
 			f_2: abc.d_2,
 			f_1: abc.d_1,
 			f_0: abc.d_0

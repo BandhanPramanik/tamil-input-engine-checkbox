@@ -53,7 +53,7 @@ form, textarea {
   font-family: Noto Sans Tamil;
 }
 
-#idaiyinam-nested-options
+#idaiyinam-sub-options
 {
   margin-top: calc(var(--pico-spacing) * .375); /* same formula as the one pico.css itself uses */
   margin-left: 2em;
@@ -74,18 +74,21 @@ form, textarea {
     flex-direction: row;
     gap: 4em;
   }
-  #consonant-section, #vowel-section {
+  #consonant-normal-section, #vowel-normal-section {
     display: grid;
     grid-template-columns: 1fr 2fr; /* width of <form element is already set, no need to worry */
     grid-template-areas:
-    "head head"
-    "extended extended"
-    "coarse fine";
+    "coarse fine"
+    "diacritic diacritic";
   }
 
   #consonant-section, #vowel-section > h2{
     grid-area: head;
   }
+  .alpha-fieldset {
+    grid-area: checkbox;
+  }
+
   .extended-fieldset {
     grid-area: extended;
   }
@@ -96,6 +99,9 @@ form, textarea {
   
   .fine-fieldset {
     grid-area: fine;
+  }
+  .diacritic-fieldset {
+    grid-area: diacritic;
   }
 }
 

@@ -25,8 +25,20 @@ function setMode(vowelOrConsonantMode)
 
     sections.forEach(section => uncheckRadios(section));
 
-    hideIdaiyinamSubOptions();
+    setVisibilityIdaiyinamSubOptions(false);
+    uncheckExtended();
     document.querySelectorAll(".fine-fieldset").forEach(section => section.hidden = true);
+}
+
+function uncheckExtended()
+{
+    document.getElementById("vowel-alpha-checkbox").checked = false;
+    document.getElementById("vowel-extended-section").hidden = true;
+    document.getElementById("vowel-normal-section").hidden = false;
+
+    document.getElementById("consonant-alpha-checkbox").checked = false;
+    document.getElementById("consonant-extended-section").hidden = true;
+    document.getElementById("consonant-normal-section").hidden = false;
 }
 
 function uncheckRadios(section)
@@ -34,16 +46,10 @@ function uncheckRadios(section)
     section.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
 }
 
-function appearIdaiyinamSubOptions()
+function setVisibilityIdaiyinamSubOptions(willBeVisible)
 {
-    const idaiyinamOptions = document.getElementById("idaiyinam-nested-options");
-    idaiyinamOptions.hidden = false;
-}
-
-function hideIdaiyinamSubOptions()
-{
-    const idaiyinamOptions = document.getElementById("idaiyinam-nested-options");
-    idaiyinamOptions.hidden = true;
+    const idaiyinamOptions = document.getElementById("idaiyinam-sub-options");
+    idaiyinamOptions.hidden = !willBeVisible;
 }
 
 async function appearFine(event, obj)
@@ -64,7 +70,7 @@ async function appearFine(event, obj)
         // If Idaiyinam sub options appeared for the previous cluster 
         // but won't appear for this one, hide it
         if (!isIdaiyinamSubAppearing)
-            hideIdaiyinamSubOptions();
+            setVisibilityIdaiyinamSubOptions(false);
     }
     else if (event.target.name === "vowel-coarse-position")
     {
@@ -109,7 +115,7 @@ async function processFine(event)
         // Early return; Phase: VALIDATING-3, Conditional I_1 visibility
         if(event.target.id === "consonant-fine-idaiyinam" && isIdaiyinamSubAppearing)
         {
-            appearIdaiyinamSubOptions();
+            setVisibilityIdaiyinamSubOptions(true);
             return;
         }
         // Phase: ACCUMULATING-2
@@ -158,7 +164,7 @@ async function processFine(event)
 
 async function processDiacritic(event)
 {
-    const diacriticValue = Number(event.target.value);
+    const diacriticValue = event.target.value === "1";
     const world = {
        features: fineFeatures,
        validity: coarseValidity,
