@@ -1,0 +1,63 @@
+// input processing
+export function rewriteVowelGroupPosition(vg) {
+    let bin = Number(vg).toString(2).padStart(3, '0');
+    // think of the digit placement as normal units place, tens place
+    // then, because the most significant digit is at the 0th index,
+    // reverse the count.
+    return {
+        gamma_2: bin[0] === "1",
+        gamma_1: bin[1] === "1",
+        gamma_0: bin[2] === "1"
+    };
+}
+// input processing
+export function rewriteFineFeatures(fd) {
+    let bin = Number(fd).toString(2).padStart(2, '0');
+    // think of the digit placement as normal units place, tens place
+    // then, because the most significant digit is at the 0th index,
+    // reverse the count.
+    return {
+        h: bin[0] === "1",
+        m: bin[1] === "1"
+    };
+}
+function findInvalidV({ v_h }, { h, m }) {
+    // Either there's no diphthong for that vowel group(v_h = 0),
+    // or the contrastive monophthong (m) switch is already flicked.
+    const isDiphthongForbidden = h && (!v_h || m);
+    return isDiphthongForbidden;
+}
+export function findCoarseValidity({ gamma_2 }) {
+    const v_h = gamma_2;
+    return { v_h };
+}
+function findFinePositions({ h, m }) {
+    // Here, we are already assuming that the coarse stuff is valid and this whole thing is valid
+    return {
+        s_1: h,
+        s_0: m
+    };
+}
+const FLAG_3 = 0b1000;
+const FLAG_2 = 0b0100;
+const FLAG_1 = 0b0010;
+const FLAG_0 = 0b0001;
+export function evalV(t, world) {
+    if (t && "e0" in world) {
+        return FLAG_3 |
+            (world.e1 ? FLAG_1 : 0) |
+            (world.e0 ? FLAG_0 : 0);
+    }
+    else if (!t && "features" in world) {
+        const invalid_v = findInvalidV(world.validity, world.features);
+        if (invalid_v)
+            return 0b0111;
+        const abc = findFinePositions(world.features);
+        return (world.xi ? FLAG_2 : 0) |
+            (abc.s_1 ? FLAG_1 : 0) |
+            (abc.s_0 ? FLAG_0 : 0);
+    }
+    else
+        return 0b0111;
+}
+//# sourceMappingURL=vowel.js.map

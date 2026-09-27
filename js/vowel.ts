@@ -1,4 +1,5 @@
-type VowelGroup = 0 | 1 | 2 | 4 | 5; // 3 has been omitted to make calculations easier
+type VowelGroup = "0" | "1" | "2" | "4" | "5"; // 3 has been omitted to make calculations easier
+type FineFeaturesDec = "0" | "1" | "2";
 
 interface VowelGroupPosition {
 	gamma_2: boolean,
@@ -20,9 +21,13 @@ interface FineFeatures {
 	m: boolean;	
 }
 
-function rewriteVowelGroupPosition(vg: VowelGroup): VowelGroupPosition
+// input processing
+export function rewriteVowelGroupPosition(vg: VowelGroup): VowelGroupPosition
 {
-	let bin = vg.toString(2).padStart(3, '0');
+	let bin = Number(vg).toString(2).padStart(3, '0');
+	// think of the digit placement as normal units place, tens place
+	// then, because the most significant digit is at the 0th index,
+	// reverse the count.
 	return {
 		gamma_2: bin[0] === "1",
 		gamma_1: bin[1] === "1",
@@ -30,17 +35,28 @@ function rewriteVowelGroupPosition(vg: VowelGroup): VowelGroupPosition
 	};
 } 
 
-function findInvalidV({v_h}: CoarseValidity, {h, m}: FineFeatures, t: boolean): boolean
+// input processing
+export function rewriteFineFeatures(fd: FineFeaturesDec): FineFeatures
+{
+	let bin = Number(fd).toString(2).padStart(2, '0');
+	// think of the digit placement as normal units place, tens place
+	// then, because the most significant digit is at the 0th index,
+	// reverse the count.
+	return {
+		h: bin[0] === "1",
+		m: bin[1] === "1"
+	}
+}
+
+function findInvalidV({v_h}: CoarseValidity, {h, m}: FineFeatures): boolean
 {
 	// Either there's no diphthong for that vowel group(v_h = 0),
 	// or the contrastive monophthong (m) switch is already flicked.
 	const isDiphthongForbidden = h && (!v_h || m);
-	// Check if we are using the Extended Mode or the Normal mode
-	const isExtended = t;
-	return isDiphthongForbidden || isExtended;
+	return isDiphthongForbidden;
 }
 
-function findCoarseValidity({gamma_2}: VowelGroupPosition): CoarseValidity
+export function findCoarseValidity({gamma_2}: VowelGroupPosition): CoarseValidity
 {
 	const v_h = gamma_2;
 	return {v_h};
@@ -54,53 +70,45 @@ function findFinePositions({h, m}: FineFeatures): FinePositions
 		s_0: m
 	};
 }
-function findExtended(e:boolean): FinePositions
+
+interface NormalWorld
 {
-	return {
-		s_1: !!0,
-		s_0: e
-	};
+	features: FineFeatures,
+	validity: CoarseValidity,
+	xi: boolean
 }
 
-interface Position
+interface ExtendedWorld
 {
-	f_3: boolean,
-	f_2: boolean,
-	f_1: boolean,
-	f_0: boolean
+	e1: boolean,
+	e0: boolean
 }
 
+type World = NormalWorld | ExtendedWorld;
 
+const FLAG_3: number = 0b1000;
+const FLAG_2: number = 0b0100;
+const FLAG_1: number = 0b0010;
+const FLAG_0: number = 0b0001;
 
-function evalV(invalid_v: boolean, t: boolean, xi: boolean, features: FineFeatures, e: boolean): Position
+export function evalV(t: boolean, world: World): number
 {
-	if (t)
+	if (t && "e0" in world)
 	{
-		const abc = findExtended(e);
-		return {
-			f_3: !!1,
-			f_2: !!0,
-			f_1: abc.s_1,
-			f_0: abc.s_0
-		};
+		return 	FLAG_3 |
+				(world.e1 ? FLAG_1 : 0) |
+				(world.e0 ? FLAG_0 : 0);
 	}
-	else if (!t && !invalid_v)
+	else if (!t && "features" in world)
 	{
-		const abc = findFinePositions(features);
-		return {
-			f_3: !!0,
-			f_2: xi,
-			f_1: abc.s_1,
-			f_0: abc.s_0
-		};
+		const invalid_v = findInvalidV(world.validity, world.features);
+		if (invalid_v)
+			return 0b0111;
+		const abc = findFinePositions(world.features);
+		return 	(world.xi ? FLAG_2 : 0) |
+				(abc.s_1 ? FLAG_1 : 0) |
+				(abc.s_0 ? FLAG_0 : 0);
 	}
 	else
-	{
-		return {
-			f_3: !!0,
-			f_2: !!1,
-			f_1: !!1,
-			f_0: !!1
-		};
-	}
+		return 0b0111;	
 }

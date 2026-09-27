@@ -1,4 +1,4 @@
-type Cluster = 0 | 1 | 2 | 3 | 4 | 5;
+type Cluster = "0" | "1" | "2" | "3" | "4" | "5";
 
 interface ClusterPosition {
 	c_2: boolean,
@@ -26,9 +26,13 @@ interface FineFeatures {
 	v: boolean	
 }
 
-function rewriteClusterPosition(clus: Cluster): ClusterPosition
+// input processsing
+export function rewriteClusterPosition(clus: Cluster): ClusterPosition
 {
-	let bin = clus.toString(2).padStart(3, '0');
+	let bin = Number(clus).toString(2).padStart(3, '0');
+	// think of the digit placement as normal units place, tens place
+	// then, because the most significant digit is at the 0th index,
+	// reverse the count.
 	return {
 		c_2: bin[0] === "1",
 		c_1: bin[1] === "1",
@@ -36,7 +40,7 @@ function rewriteClusterPosition(clus: Cluster): ClusterPosition
 	};
 } 
 
-function findInvalidD({c_i1, c_i0, c_s}: CoarseValidity, {s, i_1, i_0, m, v}: FineFeatures, alpha: boolean): boolean
+function findInvalidD({c_i1, c_i0, c_s}: CoarseValidity, {s, i_1, i_0, m, v}: FineFeatures): boolean
 {
 	// C_I, used for consonant validity has only three states: 00, 01, 10.
 	const isCIShowing11 = c_i1 && c_i0;
@@ -47,6 +51,10 @@ function findInvalidD({c_i1, c_i0, c_s}: CoarseValidity, {s, i_1, i_0, m, v}: Fi
 	const isMellinamAndSibilant = m && s;
 	const isMellinamAndVallinam = m && v;
 	const isSibilantAndVallinam = s && v;
+	// I_1 only allowed when C_I1 = 1	
+	const isI1Forbidden = i_1 && !c_i1;
+	// I_0 only allowed when C_I = 01 or 10
+	const isI0Forbidden = i_0 && !c_i0 && !c_i1;
 	// Three states for Idaiyinam: 00 (for C_I = 00), 01, and 11. 
 	// Note that C_I0 is always 1 when C_I is not 00. 
 	// I_1 can't be flicked when I_0 = 0.
@@ -55,15 +63,13 @@ function findInvalidD({c_i1, c_i0, c_s}: CoarseValidity, {s, i_1, i_0, m, v}: Fi
 	const isSibilantForbidden = s && !c_s;
 	// No switches flicked. Simple as that.
 	const areSwitchesFlicked = !i_0 && !m && !s && !v;
-	// Check if we are using the Extended Mode or the Normal mode
-	const isExtended = alpha;
 	return isCIShowing11 || isIdaiyinamAndMellinam || isIdaiyinamAndSibilant ||
-	isIdaiyinamAndVallinam || isMellinamAndSibilant || isMellinamAndVallinam ||
-	isSibilantAndVallinam || isI1BlockingI0 || isSibilantForbidden ||
-	areSwitchesFlicked || isExtended;
+	isIdaiyinamAndVallinam || isMellinamAndSibilant || isMellinamAndVallinam || 
+	isSibilantAndVallinam || isI1Forbidden || isI0Forbidden ||
+	isI1BlockingI0 || isSibilantForbidden || areSwitchesFlicked;
 }
 
-function findCoarseValidity({c_2, c_1, c_0}: ClusterPosition): CoarseValidity
+export function findCoarseValidity({c_2, c_1, c_0}: ClusterPosition): CoarseValidity
 {
 	const c_i1 = (c_2 !== c_1) && (c_1 !== c_0);
 	const c_i0 = !c_1 && (c_2 !== c_0); 
@@ -74,7 +80,7 @@ function findCoarseValidity({c_2, c_1, c_0}: ClusterPosition): CoarseValidity
 
 function findFinePositions({s, i_1, i_0, m, v}: FineFeatures): FinePositions
 {
-	// Here, we are already assuming that the coarse stuff is valid and this whole thing is valid
+	// Here, we are already assuming that the coarse stuff is valid
 	return {
 		d_2: s,
 		d_1: i_1,
@@ -82,66 +88,43 @@ function findFinePositions({s, i_1, i_0, m, v}: FineFeatures): FinePositions
 	};
 }
 
-function findExtended(e:boolean): FinePositions
+interface NormalWorld
 {
-	if (!e)
-		return {
-			d_2: !!1,
-			d_1: !!0,
-			d_0: !!1
-		}
-	else
-		return {
-			d_2: !!1,
-			d_1: !!1,
-			d_0: !!0
-		}
+	features: FineFeatures,
+	validity: CoarseValidity
 }
 
-interface Position
+interface ExtendedWorld
 {
-	f_3: boolean,
-	f_2: boolean,
-	f_1: boolean,
-	f_0: boolean
+	e1: boolean,
+	e0: boolean
 }
 
-function evalD(invalid_d: boolean, alpha: boolean, features: FineFeatures, e: boolean): Position
+type World = NormalWorld | ExtendedWorld;
+
+const FLAG_3: number = 0b1000;
+const FLAG_2: number = 0b0100;
+const FLAG_1: number = 0b0010;
+const FLAG_0: number = 0b0001;
+
+export function evalD(alpha: boolean, world: World): number
 {
-	if (alpha)
+	if (alpha && "e0" in world)
 	{
-		const abc = findExtended(e);
-		return {
-			f_3: !!1,
-			f_2: abc.d_2,
-			f_1: abc.d_1,
-			f_0: abc.d_0
-		};
+		return 	FLAG_3 |
+				(world.e1 ? FLAG_1 : 0) | 
+				(world.e0 ? FLAG_0 : 0);
 	}
-	else if (!alpha && !invalid_d)
+	else if (!alpha && "features" in world)
 	{
-		const abc = findFinePositions(features);
-		return {
-			f_3: !!1,
-			f_2: abc.d_2,
-			f_1: abc.d_1,
-			f_0: abc.d_0
-		};
+		const invalid_d = findInvalidD(world.validity, world.features);	
+		if (invalid_d)
+			return 0b0111;
+		const abc = findFinePositions(world.features);
+		return 	(abc.d_2 ? FLAG_2 : 0) |
+				(abc.d_1 ? FLAG_1 : 0) | 
+				(abc.d_0 ? FLAG_0 : 0);
 	}
 	else
-		return {
-			f_3: !!0,
-			f_2: !!1,
-			f_1: !!1,
-			f_0: !!1
-		};
+		return 0b0111;
 }
-/*
-		const abc: FinePositions = {
-			s: s,
-			i_1: i_1,
-			i_0: i_0,
-			m: m,
-			v: v
-		};
-*/

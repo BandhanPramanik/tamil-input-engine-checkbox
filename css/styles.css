@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+[hidden] {
+  display: none !important;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body{
+  padding: 1em;
+  margin: 0; /* essential stuff */
+  font-family: Lexend !important;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+  "header"
+  "form"
+  "textarea"
+  "footer";
+  /*row-gap: 1em;*/
+}
+
+h2, h1{
+  font-family: JetBrains Mono !important;
+}
+main { display: contents; }
+form { grid-area: form; }
+header { grid-area: header; }
+textarea { grid-area: textarea;}
+footer { grid-area: footer; }
+
+/*
+form, textarea {
+  max-width: 45em;
+  margin-inline: auto;
+}*/
+#mode-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+#mode-selection > * {
+  flex: 1;
+  width: 100%;
+  min-width: 100px;
+}
+
+.tamil-text{
+  font-family: Noto Sans Tamil;
+}
+
+#idaiyinam-sub-options
+{
+  margin-top: calc(var(--pico-spacing) * .375); /* same formula as the one pico.css itself uses */
+  margin-left: 2em;
+}
+
+#error-message {
+  background-color: darkred;
+}
+@media (min-width: 600px) {
+  body {
+    display: grid;
+    grid-template-columns: 1fr minmax(200px, 1fr) minmax(200px, 1fr) 1fr;
+    grid-template-areas:
+      "header   header   header   header"
+      ".  form     form     ."
+      ".  textarea textarea ."
+      ". error error ."
+      "footer   footer   footer   footer";
+  }
+  #mode-selection {
+    flex-direction: row;
+    gap: 4em;
+  }
+  #consonant-normal-section, #vowel-normal-section {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* width of <form element is already set, no need to worry */
+    grid-template-areas:
+    "coarse fine"
+    "diacritic diacritic";
+  }
+
+  #consonant-section, #vowel-section > h2{
+    grid-area: head;
+  }
+  .alpha-fieldset {
+    grid-area: checkbox;
+  }
+
+  .extended-fieldset {
+    grid-area: extended;
+  }
+  
+  .coarse-fieldset {
+    grid-area: coarse;
+  }
+  
+  .fine-fieldset {
+    grid-area: fine;
+  }
+  .diacritic-fieldset {
+    grid-area: diacritic;
+  }
+
+  #error-message {
+    grid-area: error;
+  }
+}
+
+/*
+button:hover {
+    background-color: white;
+    color: black;
+}
+button:active {
+    background-color: #464545;
+    color: white;
+}
+a:link {
+  color: #BBB;
+}
+a:visited {
+  color: #9A9A9A;
+}
+a:hover {
+  color: #FFF;
+}
+a:active {
+  color: #959595;
+} */
