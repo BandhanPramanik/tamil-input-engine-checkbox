@@ -59,7 +59,9 @@ form, textarea {
   margin-left: 2em;
 }
 
-
+#error-message {
+  background-color: darkred;
+}
 @media (min-width: 600px) {
   body {
     display: grid;
@@ -68,6 +70,7 @@ form, textarea {
       "header   header   header   header"
       ".  form     form     ."
       ".  textarea textarea ."
+      ". error error ."
       "footer   footer   footer   footer";
   }
   #mode-selection {
@@ -102,6 +105,10 @@ form, textarea {
   }
   .diacritic-fieldset {
     grid-area: diacritic;
+  }
+
+  #error-message {
+    grid-area: error;
   }
 }
 

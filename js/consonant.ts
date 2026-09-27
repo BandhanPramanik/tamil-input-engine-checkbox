@@ -88,14 +88,6 @@ function findFinePositions({s, i_1, i_0, m, v}: FineFeatures): FinePositions
 	};
 }
 
-interface Position
-{
-	f_3: boolean,
-	f_2: boolean,
-	f_1: boolean,
-	f_0: boolean
-}
-
 interface NormalWorld
 {
 	features: FineFeatures,
@@ -110,40 +102,29 @@ interface ExtendedWorld
 
 type World = NormalWorld | ExtendedWorld;
 
-export function evalD(alpha: boolean, world: World): Position
+const FLAG_3: number = 0b1000;
+const FLAG_2: number = 0b0100;
+const FLAG_1: number = 0b0010;
+const FLAG_0: number = 0b0001;
+
+export function evalD(alpha: boolean, world: World): number
 {
 	if (alpha && "e0" in world)
 	{
-		return {
-			f_3: !!1,
-			f_2: !!1,
-			f_1: world.e1,
-			f_0: world.e0
-		};
+		return 	FLAG_3 |
+				(world.e1 ? FLAG_1 : 0) | 
+				(world.e0 ? FLAG_0 : 0);
 	}
 	else if (!alpha && "features" in world)
 	{
 		const invalid_d = findInvalidD(world.validity, world.features);	
 		if (invalid_d)
-			return {
-				f_3: !!0,
-				f_2: !!1,
-				f_1: !!1,
-				f_0: !!1
-			};
+			return 0b0111;
 		const abc = findFinePositions(world.features);
-		return {
-			f_3: !!0,
-			f_2: abc.d_2,
-			f_1: abc.d_1,
-			f_0: abc.d_0
-		};
+		return 	(abc.d_2 ? FLAG_2 : 0) |
+				(abc.d_1 ? FLAG_1 : 0) | 
+				(abc.d_0 ? FLAG_0 : 0);
 	}
 	else
-		return {
-			f_3: !!0,
-			f_2: !!1,
-			f_1: !!1,
-			f_0: !!1
-		};
+		return 0b0111;
 }

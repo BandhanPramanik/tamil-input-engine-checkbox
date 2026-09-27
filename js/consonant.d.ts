@@ -18,12 +18,6 @@ interface FineFeatures {
 }
 export declare function rewriteClusterPosition(clus: Cluster): ClusterPosition;
 export declare function findCoarseValidity({ c_2, c_1, c_0 }: ClusterPosition): CoarseValidity;
-interface Position {
-    f_3: boolean;
-    f_2: boolean;
-    f_1: boolean;
-    f_0: boolean;
-}
 interface NormalWorld {
     features: FineFeatures;
     validity: CoarseValidity;
@@ -33,6 +27,6 @@ interface ExtendedWorld {
     e0: boolean;
 }
 type World = NormalWorld | ExtendedWorld;
-export declare function evalD(alpha: boolean, world: World): Position;
+export declare function evalD(alpha: boolean, world: World): number;
 export {};
 //# sourceMappingURL=consonant.d.ts.map

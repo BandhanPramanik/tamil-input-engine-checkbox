@@ -15,12 +15,6 @@ interface FineFeatures {
 export declare function rewriteVowelGroupPosition(vg: VowelGroup): VowelGroupPosition;
 export declare function rewriteFineFeatures(fd: FineFeaturesDec): FineFeatures;
 export declare function findCoarseValidity({ gamma_2 }: VowelGroupPosition): CoarseValidity;
-interface Position {
-    f_3: boolean;
-    f_2: boolean;
-    f_1: boolean;
-    f_0: boolean;
-}
 interface NormalWorld {
     features: FineFeatures;
     validity: CoarseValidity;
@@ -31,6 +25,6 @@ interface ExtendedWorld {
     e0: boolean;
 }
 type World = NormalWorld | ExtendedWorld;
-export declare function evalV(t: boolean, world: World): Position;
+export declare function evalV(t: boolean, world: World): number;
 export {};
 //# sourceMappingURL=vowel.d.ts.map
