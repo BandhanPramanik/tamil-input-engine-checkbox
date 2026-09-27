@@ -71,7 +71,7 @@ form, textarea {
       ".  form     form     ."
       ".  textarea textarea ."
       ". error error ."
-      "footer   footer   footer   footer";
+      ". footer   footer .";
   }
   #mode-selection {
     flex-direction: row;
