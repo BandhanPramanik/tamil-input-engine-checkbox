@@ -61,7 +61,7 @@ form, textarea {
 
 footer {
   display: flex;
-  align-items: center;
+  align-items: space-around;
   justify-content: center;
 }
 @media (min-width: 600px) {
