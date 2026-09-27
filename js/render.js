@@ -40,6 +40,8 @@ export function renderVowel(input) {
     if (entry !== undefined && ("grp" in input && typeof entry === "object")) {
         if (input.grp === "5")
             output = entry[4];
+        else if (input.grp === "4")
+            output = entry[3];
         else
             output = entry[Number(input.grp)];
     }
