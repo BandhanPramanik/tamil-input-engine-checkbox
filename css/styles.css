@@ -27,11 +27,7 @@ body{
 h2, h1{
   font-family: JetBrains Mono !important;
 }
-main { display: contents; }
-form { grid-area: form; }
-header { grid-area: header; }
-textarea { grid-area: textarea;}
-footer { grid-area: footer; }
+
 
 /*
 form, textarea {
@@ -79,6 +75,11 @@ footer {
       ". error error ."
       ". footer   footer .";
   }
+  main { display: contents; }
+  form { grid-area: form; }
+  header { grid-area: header; }
+  textarea { grid-area: textarea;}
+  footer { grid-area: footer; }
   #mode-selection {
     flex-direction: row;
     gap: 4em;
