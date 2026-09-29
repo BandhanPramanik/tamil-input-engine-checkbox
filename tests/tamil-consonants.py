@@ -1,4 +1,4 @@
-# Human-generated code; looked at docs to make this
+# Human-generated code; looked at the docs to make this
 from sympy import symbols
 from sympy.logic import *
 from sympy.logic.boolalg import *

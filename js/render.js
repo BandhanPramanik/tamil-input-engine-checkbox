@@ -17,10 +17,10 @@ const VOWEL_LOOKUP_TABLE = [
     /*0b1111*/ undefined,
 ];
 const CONSONANT_LOOKUP_TABLE = [
-    /*0b0000*/ ["க", "ச", "ட", "த", "ப", "ற"],
-    /*0b0001*/ ["ங", "ஞ", "ண", "ந", "ம", "ன"],
-    /*0b0010*/ [undefined, "ய", "ள", undefined, "வ", "ர"],
-    /*0b0011*/ [undefined, undefined, "ழ", undefined, undefined, "ல"],
+    /*0b0000*/ ["க", "ச", "ட", "ற", "த", "ப"],
+    /*0b0001*/ ["ங", "ஞ", "ண", "ன", "ந", "ம"],
+    /*0b0010*/ [undefined, "ய", "ள", "ர", undefined, "வ"],
+    /*0b0011*/ [undefined, undefined, "ழ", "ல", undefined, undefined],
     /*0b0100*/ [undefined, "ஶ", "ஷ", "ஸ", undefined, undefined],
     /*0b0101*/ undefined,
     /*0b0110*/ undefined,
