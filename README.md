@@ -5,3 +5,5 @@ This website is inspired from the preprint "[Taravinyas: Mapping Paninian Phonol
 Note: On Android, Chromium-based browsers may dismiss the keyboard when switching input layouts; Firefox for Android works as expected.
 
 ## Please compile Typescript to JS after every code change.
+
+

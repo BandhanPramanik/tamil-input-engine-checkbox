@@ -16,6 +16,10 @@ const VOWEL_LOOKUP_TABLE = [
     /*0b1110*/ undefined,
     /*0b1111*/ undefined,
 ];
+// Alveolar moved to third coarse position.
+// ஸ is alveolar, not dental.
+// In the coarse validity truth table, I had to change the rows of
+// C_I1 and C_I0, but not of C_S
 const CONSONANT_LOOKUP_TABLE = [
     /*0b0000*/ ["க", "ச", "ட", "ற", "த", "ப"],
     /*0b0001*/ ["ங", "ஞ", "ண", "ன", "ந", "ம"],
