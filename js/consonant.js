@@ -38,8 +38,8 @@ function findInvalidD({ c_i1, c_i0, c_s }, { s, i_1, i_0, m, v }) {
         isI1BlockingI0 || isSibilantForbidden || areSwitchesFlicked;
 }
 export function findCoarseValidity({ c_2, c_1, c_0 }) {
-    const c_i1 = (c_2 !== c_1) && (c_1 !== c_0);
-    const c_i0 = !c_1 && (c_2 !== c_0);
+    const c_i1 = c_1 && !c_2;
+    const c_i0 = c_0 && !c_1;
     const c_s = !c_2 && (c_0 || c_1);
     return { c_i1, c_i0, c_s };
 }
@@ -47,7 +47,7 @@ function findFinePositions({ s, i_1, i_0, m, v }) {
     // Here, we are already assuming that the coarse stuff is valid
     return {
         d_2: s,
-        d_1: i_1,
+        d_1: i_0,
         d_0: m || i_1
     };
 }

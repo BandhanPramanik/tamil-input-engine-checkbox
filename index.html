@@ -15,8 +15,8 @@
 		<form>
 			<fieldset id="mode-selection">
 				<legend>Vowel or Consonant</legend>
-				<button type="button" data-vowel-or-consonant-mode="vowel-mode" onclick="setMode(this.dataset.vowelOrConsonantMode)">Vowel</button>
-				<button type="button" data-vowel-or-consonant-mode="consonant-mode" onclick="setMode(this.dataset.vowelOrConsonantMode)">Consonant</button>
+				<button type="button" data-vowel-or-consonant-mode="vowel-mode" onclick="setMode(this.dataset.vowelOrConsonantMode)">Mode selection</button>
+				<button type="button" data-vowel-or-consonant-mode="consonant-mode" onclick="setMode(this.dataset.vowelOrConsonantMode)">Consonants</button>
 			</fieldset>
 			<section id="vowel-section">
 				<h2>Vowel</h2>
@@ -26,7 +26,7 @@
 				</fieldset>
 				<div id="vowel-extended-section" hidden>
 					<fieldset class="extended-fieldset" onchange="processExtended(event)">
-						<legend>Extended letters:</legend>
+						<legend>Extended letters</legend>
 						<label>
 							<input type="radio" name="vowel-extended-letters" value="0">
 							Pulli/<span lang="ta" class="tamil-text">&#x200c;&#x0bcd;</span>
@@ -43,7 +43,7 @@
 				</div>
 				<div id="vowel-normal-section">
 					<fieldset class="coarse-fieldset" onchange="appearFine(event, this)">
-						<legend>Coarse position:</legend>
+						<legend>Coarse position</legend>
 						<label>
 							<input type="radio" name="vowel-coarse-position" value="0">
 							a/<span lang="ta" class="tamil-text">அ</span>
@@ -66,7 +66,7 @@
 						</label>
 					</fieldset>
 					<fieldset class="fine-fieldset" onchange="processFine(event)" hidden>
-						<legend>Fine position:</legend>
+						<legend>Fine position</legend>
 						<label>
 							<input type="radio" name="vowel-fine-position" value="0">
 							Normal Monophthong
@@ -81,7 +81,7 @@
 						</label>
 					</fieldset>
 					<fieldset class="diacritic-fieldset" onchange="processDiacritic(event)">
-						<legend>Diacritic or Standalone Vowel:</legend>
+						<legend>Diacritic or Standalone Vowel</legend>
 						<input type="radio" id="standalone-vowel" name="vowel-diacritic" value="0">
 						<label for="standalone-vowel">Standalone</label>
 						<input type="radio" id="diacritic-vowel" name="vowel-diacritic" value="1">
@@ -98,7 +98,7 @@
 				</fieldset>
 				<div id="consonant-extended-section" hidden>
 					<fieldset class="extended-fieldset" onchange="processExtended(event)">
-						<legend>Extended letters:</legend>
+						<legend>Extended letters</legend>
 						<label>
 							<input type="radio" name="consonant-extended-letters" value="0">
 							ja/<span lang="ta" class="tamil-text">ஜ</span>
@@ -115,7 +115,7 @@
 				</div>	
 				<div id="consonant-normal-section">
 					<fieldset class="coarse-fieldset" onchange="appearFine(event, this)">
-						<legend>Coarse position:</legend>
+						<legend>Coarse position</legend>
 						<label>
 							<input type="radio" name="consonant-coarse-position" value="0">
 							ka/<span lang="ta" class="tamil-text">க</span> (Velar)
@@ -130,19 +130,19 @@
 						</label>
 						<label>
 							<input type="radio" name="consonant-coarse-position" value="3">
-							ta/<span lang="ta" class="tamil-text">த</span> (Dental)
+							r2a/<span lang="ta" class="tamil-text">ற</span> (Alveolar)
 						</label>
 						<label>
 							<input type="radio" name="consonant-coarse-position" value="4">
-							pa/<span lang="ta" class="tamil-text">ப</span> (Labial)
+							ta/<span lang="ta" class="tamil-text">த</span> (Dental)
 						</label>
 						<label>
 							<input type="radio" name="consonant-coarse-position" value="5">
-							r2a/<span lang="ta" class="tamil-text">ற</span> (Alveolar)
+							pa/<span lang="ta" class="tamil-text">ப</span> (Labial)
 						</label>
 					</fieldset>
 					<fieldset class="fine-fieldset" onchange="processFine(event, this)" hidden>
-						<legend>Fine position:</legend>
+						<legend>Fine position</legend>
 						<label>
 							<input type="radio" name="consonant-fine-position">
 							Vallinam
@@ -159,7 +159,7 @@
 							<div id="idaiyinam-sub-options" hidden>
 								<label>
 									<input type="radio" name="fine-idaiyinam-position" value="false">
-									Approximant (ra, ர / Zha, ழ)
+									Rhotic (ra, ர / Zha, ழ)
 								</label>
 								<label>
 									<input type="radio" name="fine-idaiyinam-position" value="true">

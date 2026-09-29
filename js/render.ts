@@ -41,11 +41,15 @@ const VOWEL_LOOKUP_TABLE: Array<FiveVowelGroups | string | undefined> = [
 	/*0b1111*/ undefined,
 ];
 
+// Alveolar moved to third coarse position.
+// ஸ is alveolar, not dental.
+// In the coarse validity truth table, I had to change the rows of
+// C_I1 and C_I0, but not of C_S
 const CONSONANT_LOOKUP_TABLE: Array<SixConsonantGroups | string | undefined> = [
-	/*0b0000*/ ["க", "ச", "ட", "த", "ப", "ற"],
-	/*0b0001*/ ["ங", "ஞ", "ண", "ந", "ம", "ன"],
-	/*0b0010*/ [undefined, "ய", "ள", undefined, "வ", "ர"],
-	/*0b0011*/ [undefined, undefined, "ழ", undefined, undefined, "ல"],
+	/*0b0000*/ ["க", "ச", "ட", "ற", "த", "ப"],
+	/*0b0001*/ ["ங", "ஞ", "ண", "ன", "ந", "ம"],
+	/*0b0010*/ [undefined, "ய", "ள", "ர", undefined, "வ"],
+	/*0b0011*/ [undefined, undefined, "ழ", "ல", undefined, undefined],
 	/*0b0100*/ [undefined, "ஶ", "ஷ", "ஸ", undefined, undefined],
 	/*0b0101*/ undefined,
 	/*0b0110*/ undefined,
