@@ -2,6 +2,17 @@ const buttons = document.querySelectorAll("[data-vowel-or-consonant-mode]");
 const sections = document.querySelectorAll('[id$="-section"]');
 const textplace = document.querySelector("textarea");
 const errorContainer = document.getElementById("error-message");
+
+# Loading the modules early on
+const { consonantModule, vowelModule } = loadModules();
+
+async function loadModules()
+{
+    const consonant = await import("./js/consonant.js");
+    const vowel = await import("./js/vowel.js");
+    return {consonant, vowel};
+}
+
 let group, coarseValidity, fineFeatures, isIdaiyinamSubAppearing, pos;
 
 function setMode(vowelOrConsonantMode)
@@ -63,11 +74,10 @@ async function appearFine(event, obj)
     group = event.target.value;
     if (event.target.name === "consonant-coarse-position")
     {
-        const { rewriteClusterPosition, findCoarseValidity } = await import("./js/consonant.js");
         // Phase: ACCUMULATING-1, varga state updated
-        const coarsePositions = rewriteClusterPosition(group);
+        const coarsePositions = consonantModule.rewriteClusterPosition(group);
         // Phase: VALIDATING-1
-        coarseValidity = findCoarseValidity(coarsePositions);
+        coarseValidity = consonantModule.findCoarseValidity(coarsePositions);
         // Will the sub-options of Idaiyinam appear if the user selects it?
         // Prep for VALIDATING-3
         // also, c_i becoming 10 is what we want only
@@ -79,11 +89,10 @@ async function appearFine(event, obj)
     }
     else if (event.target.name === "vowel-coarse-position")
     {
-        const { rewriteVowelGroupPosition, findCoarseValidity } = await import("./js/vowel.js");
         // Phase: ACCUMULATING-1, vowel group / vowel class state updated
-        const coarsePositions = rewriteVowelGroupPosition(group);
+        const coarsePositions = vowelModule.rewriteVowelGroupPosition(group);
         // Phase: VALIDATING-1
-        coarseValidity = findCoarseValidity(coarsePositions);
+        coarseValidity = vowelModule.findCoarseValidity(coarsePositions);
     }
 
     // In case someone selects only "Idaiyinam" in a case where there are sub-options,
@@ -135,10 +144,7 @@ async function processFine(event)
            features: fineFeatures,
            validity: coarseValidity 
        }
-       const { evalD } = await import("./js/consonant.js");
-       pos = evalD(false, world);
-       const { renderConsonant } = await import("./js/render.js"); 
-       ;
+       pos = consonantModule.evalD(false, world);
        appendToTextarea(renderConsonant({ grp: group, pos: pos }));
    }
     // Consonant Idaiyinam
@@ -157,18 +163,15 @@ async function processFine(event)
        features: fineFeatures,
        validity: coarseValidity 
    }
-   const { evalD } = await import("./js/consonant.js");
-   pos = evalD(false, world);
-   const { renderConsonant } = await import("./js/render.js"); 
+   pos = consonantModule.evalD(false, world);
    appendToTextarea(renderConsonant({ grp: group, pos: pos}));
 }
     // Vowel
 if (event.target.name === "vowel-fine-position")
 {
     const value = event.target.value;
-    const { rewriteFineFeatures } = await import("./js/vowel.js"); 
         // Phase: ACCUMULATING-2
-    fineFeatures = rewriteFineFeatures(value);
+    fineFeatures = vowelModule.rewriteFineFeatures(value);
 }
 }
 
@@ -180,9 +183,7 @@ async function processDiacritic(event)
        validity: coarseValidity,
        xi: diacriticValue
    };
-   const { evalV } = await import("./js/vowel.js");
-   pos = evalV(false, world);
-   const { renderVowel } = await import("./js/render.js"); 
+   pos = vowelModule.evalV(false, world);
    appendToTextarea(renderVowel({ grp: group, pos: pos }));
 }
 
@@ -195,16 +196,12 @@ async function processExtended(event)
     }
     if (event.target.name === "vowel-extended-letters")
     {
-        const { evalV } = await import("./js/vowel.js");
-        pos = evalV(true, world);
-        const { renderVowel } = await import("./js/render.js"); 
+        pos = vowelModule.evalV(true, world);
         appendToTextarea(renderVowel({ pos: pos }));
     }
     if (event.target.name === "consonant-extended-letters")
     {
-        const { evalD } = await import("./js/consonant.js");
-        pos = evalD(true, world);
-        const { renderConsonant } = await import("./js/render.js"); 
+        pos = vowelModule.evalD(true, world);
         appendToTextarea(renderConsonant({ pos: pos }));
     }
 }
