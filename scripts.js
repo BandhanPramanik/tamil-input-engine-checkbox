@@ -68,14 +68,14 @@ function setVisibilityIdaiyinamSubOptions(willBeVisible)
     idaiyinamOptions.hidden = !willBeVisible;
 }
 
-async function appearFine(event, obj)
+function appearFine(event, obj)
 {
     // for validity lines
     group = event.target.value;
     if (event.target.name === "consonant-coarse-position")
     {
         // Phase: ACCUMULATING-1, varga state updated
-        const coarsePositions = consonantModule.rewriteClusterPosition(group);
+        const coarsePositions = consonantModule.rewriteVargaPosition(group);
         // Phase: VALIDATING-1
         coarseValidity = consonantModule.findCoarseValidity(coarsePositions);
         // Will the sub-options of Idaiyinam appear if the user selects it?
@@ -119,7 +119,7 @@ function processAlpha(event)
    } 
 }
 
-async function processFine(event)
+function processFine(event)
 {
     // Consonant
     if (event.target.name === "consonant-fine-position")
@@ -166,16 +166,16 @@ async function processFine(event)
    pos = consonantModule.evalD(false, world);
    appendToTextarea(renderConsonant({ grp: group, pos: pos}));
 }
-    // Vowel
+// Vowel
 if (event.target.name === "vowel-fine-position")
 {
     const value = event.target.value;
-        // Phase: ACCUMULATING-2
+    // Phase: ACCUMULATING-2
     fineFeatures = vowelModule.rewriteFineFeatures(value);
 }
 }
 
-async function processDiacritic(event)
+function processDiacritic(event)
 {
     const diacriticValue = event.target.value === "1";
     const world = {
@@ -187,7 +187,7 @@ async function processDiacritic(event)
    appendToTextarea(renderVowel({ grp: group, pos: pos }));
 }
 
-async function processExtended(event)
+function processExtended(event)
 {
     const extendedValue = Number(event.target.value);
     const world = {
