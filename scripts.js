@@ -207,7 +207,7 @@ function processExtended(event)
     }
     if (event.target.name === "consonant-extended-letters")
     {
-        pos = vowelModule.evalD(true, world);
+        pos = consonantModule.evalD(true, world);
         appendToTextarea(renderModule.renderConsonant({ pos: pos }));
     }
 }

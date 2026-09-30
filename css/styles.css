@@ -34,8 +34,6 @@
   src: url('../fonts/noto-sans-tamil-v31-latin_tamil-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-
-
 /* jetbrains-mono-700 - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
@@ -44,9 +42,6 @@
   font-weight: 700;
   src: url('../fonts/jetbrains-mono-v24-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-
-
-
 
 [hidden] {
   display: none !important;
@@ -61,7 +56,7 @@ body{
   margin: 0; /* essential stuff */
   font-family: Lexend !important;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-areas: 
   "header"
   "form"
@@ -79,8 +74,8 @@ body{
 
 h2, h1{
   font-family: JetBrains Mono !important;
+  overflow-wrap: normal;
 }
-
 
 /*
 form, textarea {
@@ -100,6 +95,8 @@ form, textarea {
 
 .tamil-text{
   font-family: Noto Sans Tamil;
+  display: inline-block;
+  white-space: nowrap;
 }
 
 #idaiyinam-sub-options
@@ -127,7 +124,7 @@ footer > small {
 @media (min-width: 600px) {
   body {
     display: grid;
-    grid-template-columns: 1fr minmax(200px, 1fr) minmax(200px, 1fr) 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(200px, 1fr) minmax(200px, 1fr) minmax(0, 1fr);
     grid-template-areas:
       "header   header   header   header"
       ".  form     form     ."
