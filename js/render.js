@@ -38,7 +38,7 @@ const CONSONANT_LOOKUP_TABLE = [
     /*0b1110*/ undefined,
     /*0b1111*/ undefined,
 ];
-export function renderVowel(input) {
+function renderVowel(input) {
     let output;
     const entry = VOWEL_LOOKUP_TABLE[input.pos];
     if (entry !== undefined && ("grp" in input && typeof entry === "object")) {
@@ -53,7 +53,7 @@ export function renderVowel(input) {
         output = entry;
     return output;
 }
-export function renderConsonant(input) {
+function renderConsonant(input) {
     let output;
     const entry = CONSONANT_LOOKUP_TABLE[input.pos];
     if (entry !== undefined && ("grp" in input && typeof entry === "object"))
@@ -62,4 +62,5 @@ export function renderConsonant(input) {
         output = entry;
     return output;
 }
+export {};
 //# sourceMappingURL=render.js.map
