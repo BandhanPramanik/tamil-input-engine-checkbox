@@ -4,6 +4,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Taravinyas</title>
+	<link rel="modulepreload" href="js/render.js">
+	<link rel="modulepreload" href="js/vowel.js">
+	<link rel="modulepreload" href="js/consonant.js">
 	<link rel="stylesheet" type="text/css" href="css/pico.classless.sand.min.css">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
@@ -191,9 +194,6 @@
 			On Android, Chromium-based browsers may dismiss the keyboard when switching input layouts; Firefox for Android works as expected.
 		</small>
 	</footer>
-	<script src="scripts.js"></script>
-	<script src="js/render.js"</script>
-	<script type="module" src="js/vowel.js"></script>
-	<script type="module" src="js/consonant.js"></script>
+	<script defer src="scripts.js"></script>
 </body>
 </html>

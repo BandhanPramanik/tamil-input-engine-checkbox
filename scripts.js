@@ -1,17 +1,23 @@
+// Loading the modules early on
+let consonantModule, vowelModule, renderModule;
+
+loadModules().then(m => {
+    ({ consonantModule, vowelModule, renderModule } = m);
+});
+
+async function loadModules()
+{
+    const consonantModule = await import("./js/consonant.js");
+    const vowelModule = await import("./js/vowel.js");
+	const renderModule = await import("./js/render.js");
+    return {consonantModule, vowelModule, renderModule};
+}
+
+
 const buttons = document.querySelectorAll("[data-vowel-or-consonant-mode]");
 const sections = document.querySelectorAll('[id$="-section"]');
 const textplace = document.querySelector("textarea");
 const errorContainer = document.getElementById("error-message");
-
-# Loading the modules early on
-const { consonantModule, vowelModule } = loadModules();
-
-async function loadModules()
-{
-    const consonant = await import("./js/consonant.js");
-    const vowel = await import("./js/vowel.js");
-    return {consonant, vowel};
-}
 
 let group, coarseValidity, fineFeatures, isIdaiyinamSubAppearing, pos;
 
@@ -145,7 +151,7 @@ function processFine(event)
            validity: coarseValidity 
        }
        pos = consonantModule.evalD(false, world);
-       appendToTextarea(renderConsonant({ grp: group, pos: pos }));
+       appendToTextarea(renderModule.renderConsonant({ grp: group, pos: pos }));
    }
     // Consonant Idaiyinam
    if (event.target.name === "fine-idaiyinam-position")
@@ -164,7 +170,7 @@ function processFine(event)
        validity: coarseValidity 
    }
    pos = consonantModule.evalD(false, world);
-   appendToTextarea(renderConsonant({ grp: group, pos: pos}));
+   appendToTextarea(renderModule.renderConsonant({ grp: group, pos: pos}));
 }
 // Vowel
 if (event.target.name === "vowel-fine-position")
@@ -184,7 +190,7 @@ function processDiacritic(event)
        xi: diacriticValue
    };
    pos = vowelModule.evalV(false, world);
-   appendToTextarea(renderVowel({ grp: group, pos: pos }));
+   appendToTextarea(renderModule.renderVowel({ grp: group, pos: pos }));
 }
 
 function processExtended(event)
@@ -197,12 +203,12 @@ function processExtended(event)
     if (event.target.name === "vowel-extended-letters")
     {
         pos = vowelModule.evalV(true, world);
-        appendToTextarea(renderVowel({ pos: pos }));
+        appendToTextarea(renderModule.renderVowel({ pos: pos }));
     }
     if (event.target.name === "consonant-extended-letters")
     {
         pos = vowelModule.evalD(true, world);
-        appendToTextarea(renderConsonant({ pos: pos }));
+        appendToTextarea(renderModule.renderConsonant({ pos: pos }));
     }
 }
 
