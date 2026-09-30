@@ -1,5 +1,5 @@
 // input processsing
-export function rewriteClusterPosition(clus) {
+export function rewriteVargaPosition(clus) {
     let bin = Number(clus).toString(2).padStart(3, '0');
     // think of the digit placement as normal units place, tens place
     // then, because the most significant digit is at the 0th index,

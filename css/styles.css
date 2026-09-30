@@ -66,9 +66,16 @@ body{
   "header"
   "form"
   "textarea"
+  "error"
   "footer";
   /*row-gap: 1em;*/
 }
+  main { display: contents; }
+  form { grid-area: form; }
+  header { grid-area: header; }
+  textarea { grid-area: textarea; }
+  #error-message { grid-area: error; }
+  footer { grid-area: footer; }
 
 h2, h1{
   font-family: JetBrains Mono !important;
@@ -128,11 +135,7 @@ footer > small {
       ". error error ."
       ". footer   footer .";
   }
-  main { display: contents; }
-  form { grid-area: form; }
-  header { grid-area: header; }
-  textarea { grid-area: textarea;}
-  footer { grid-area: footer; }
+
   #mode-selection {
     flex-direction: row;
     gap: 4em;
@@ -166,12 +169,7 @@ footer > small {
   .diacritic-fieldset {
     grid-area: diacritic;
   }
-
-  #error-message {
-    grid-area: error;
-  }
 }
-
 /*
 button:hover {
     background-color: white;

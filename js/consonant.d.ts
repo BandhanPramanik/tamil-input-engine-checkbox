@@ -1,5 +1,5 @@
-type Cluster = "0" | "1" | "2" | "3" | "4" | "5";
-interface ClusterPosition {
+type Varga = "0" | "1" | "2" | "3" | "4" | "5";
+interface VargaPosition {
     c_2: boolean;
     c_1: boolean;
     c_0: boolean;
@@ -16,8 +16,8 @@ interface FineFeatures {
     m: boolean;
     v: boolean;
 }
-export declare function rewriteClusterPosition(clus: Cluster): ClusterPosition;
-export declare function findCoarseValidity({ c_2, c_1, c_0 }: ClusterPosition): CoarseValidity;
+export declare function rewriteVargaPosition(clus: Varga): VargaPosition;
+export declare function findCoarseValidity({ c_2, c_1, c_0 }: VargaPosition): CoarseValidity;
 interface NormalWorld {
     features: FineFeatures;
     validity: CoarseValidity;

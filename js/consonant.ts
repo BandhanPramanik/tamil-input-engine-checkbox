@@ -1,6 +1,6 @@
-type Cluster = "0" | "1" | "2" | "3" | "4" | "5";
+type Varga = "0" | "1" | "2" | "3" | "4" | "5";
 
-interface ClusterPosition {
+interface VargaPosition {
 	c_2: boolean,
 	c_1: boolean,
 	c_0: boolean
@@ -27,7 +27,7 @@ interface FineFeatures {
 }
 
 // input processsing
-export function rewriteClusterPosition(clus: Cluster): ClusterPosition
+export function rewriteVargaPosition(clus: Varga): VargaPosition
 {
 	let bin = Number(clus).toString(2).padStart(3, '0');
 	// think of the digit placement as normal units place, tens place
@@ -69,7 +69,7 @@ function findInvalidD({c_i1, c_i0, c_s}: CoarseValidity, {s, i_1, i_0, m, v}: Fi
 	isI1BlockingI0 || isSibilantForbidden || areSwitchesFlicked;
 }
 
-export function findCoarseValidity({c_2, c_1, c_0}: ClusterPosition): CoarseValidity
+export function findCoarseValidity({c_2, c_1, c_0}: VargaPosition): CoarseValidity
 {
 	const c_i1 = c_1 && !c_2;
 	const c_i0 = c_0 && !c_1; 
