@@ -63,7 +63,6 @@ body{
   "textarea"
   "error"
   "footer";
-  /*row-gap: 1em;*/
 }
   main { display: contents; }
   form { grid-area: form; }
@@ -74,14 +73,8 @@ body{
 
 h2, h1{
   font-family: JetBrains Mono !important;
-  overflow-wrap: normal;
 }
 
-/*
-form, textarea {
-  max-width: 45em;
-  margin-inline: auto;
-}*/
 #mode-selection {
   display: flex;
   flex-direction: column;
@@ -95,8 +88,6 @@ form, textarea {
 
 .tamil-text{
   font-family: Noto Sans Tamil;
-  display: inline-block;
-  white-space: nowrap;
 }
 
 #idaiyinam-sub-options
@@ -167,24 +158,3 @@ footer > small {
     grid-area: diacritic;
   }
 }
-/*
-button:hover {
-    background-color: white;
-    color: black;
-}
-button:active {
-    background-color: #464545;
-    color: white;
-}
-a:link {
-  color: #BBB;
-}
-a:visited {
-  color: #9A9A9A;
-}
-a:hover {
-  color: #FFF;
-}
-a:active {
-  color: #959595;
-} */
