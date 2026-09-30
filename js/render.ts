@@ -68,7 +68,7 @@ const CONSONANT_LOOKUP_TABLE: Array<SixConsonantGroups | string | undefined> = [
 	/*0b1111*/ undefined,
 ];
 
-export function renderVowel(input: VowelInputType): StrOrUndef
+function renderVowel(input: VowelInputType): StrOrUndef
 {
 	let output;
 	const entry = VOWEL_LOOKUP_TABLE[input.pos];
@@ -87,7 +87,7 @@ export function renderVowel(input: VowelInputType): StrOrUndef
 	return output;
 }
 
-export function renderConsonant(input: ConsonantInputType): StrOrUndef
+function renderConsonant(input: ConsonantInputType): StrOrUndef
 {
 	let output;
 	const entry = CONSONANT_LOOKUP_TABLE[input.pos];
