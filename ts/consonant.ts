@@ -1,6 +1,6 @@
-type Varga = "0" | "1" | "2" | "3" | "4" | "5";
+type ConsonantGroup = "0" | "1" | "2" | "3" | "4" | "5";
 
-interface VargaPosition {
+interface CoarsePosition {
 	c_2: boolean,
 	c_1: boolean,
 	c_0: boolean
@@ -27,7 +27,7 @@ interface FineFeatures {
 }
 
 // input processsing
-export function rewriteVargaPosition(clus: Varga): VargaPosition
+export function rewriteCoarsePosition(clus: ConsonantGroup): CoarsePosition
 {
 	let bin = Number(clus).toString(2).padStart(3, '0');
 	// think of the digit placement as normal units place, tens place
@@ -69,11 +69,11 @@ function findInvalidD({c_i1, c_i0, c_s}: CoarseValidity, {s, i_1, i_0, m, v}: Fi
 	isI1BlockingI0 || isSibilantForbidden || areSwitchesFlicked;
 }
 
-export function findCoarseValidity({c_2, c_1, c_0}: VargaPosition): CoarseValidity
+export function findCoarseValidity({c_2, c_1, c_0}: CoarsePosition): CoarseValidity
 {
-	const c_i1 = c_1 && !c_2;
-	const c_i0 = c_0 && !c_1; 
-	const c_s = !c_2 && (c_0 || c_1);	 
+	const c_i1 = (c_0 === c_2) && (c_1 !== c_0);
+	const c_i0 = !c_1 && (c_0 !== c_2); 
+	const c_s = !((c_1 === c_0) || (c_2 && c_1));
 	return {c_i1, c_i0, c_s};
 }
 

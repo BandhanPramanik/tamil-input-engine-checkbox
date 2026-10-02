@@ -4,9 +4,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Taravinyas</title>
-	<link rel="modulepreload" href="js/render.js">
-	<link rel="modulepreload" href="js/vowel.js">
-	<link rel="modulepreload" href="js/consonant.js">
+	<link rel="modulepreload" href="ts/render.js">
+	<link rel="modulepreload" href="ts/vowel.js">
+	<link rel="modulepreload" href="ts/consonant.js">
 	<link rel="stylesheet" type="text/css" href="css/pico.classless.sand.min.css">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
@@ -16,6 +16,12 @@
 	</header>
 	<main>
 		<form>
+			<fieldset id="centamil-toggle">
+				<label>
+					<input type="checkbox" role="switch" onchange="toggleCentamil(event)">
+					Centamil Mode
+				</label>
+			</fieldset>
 			<fieldset id="mode-selection">
 				<legend>Mode selection</legend>
 				<button type="button" data-vowel-or-consonant-mode="vowel-mode" onclick="setMode(this.dataset.vowelOrConsonantMode)">Vowels and others</button>
@@ -23,13 +29,13 @@
 			</fieldset>
 			<section id="vowel-section">
 				<h2>Vowels and others</h2>
-				<fieldset class="alpha-fieldset" onchange="processAlpha(event)">
-					<input type="checkbox" id="vowel-alpha-checkbox">
-					<label for="vowel-alpha-checkbox">Use the extended mode</label>
+				<fieldset class="alpha-fieldset" id="vowel-alpha-fieldset" onchange="processAlpha(event)">
+					<input type="checkbox" role="switch" id="vowel-alpha-checkbox">
+					<label for="vowel-alpha-checkbox">Use the other characters</label>
 				</fieldset>
 				<div id="vowel-extended-section" hidden>
 					<fieldset class="extended-fieldset" onchange="processExtended(event)">
-						<legend>Extended letters</legend>
+						<legend>Other characters</legend>
 						<label>
 							<input type="radio" name="vowel-extended-letters" value="0">
 							Pulli/<span lang="ta" class="tamil-text">&#x200c;&#x0bcd;</span>
@@ -39,8 +45,8 @@
 							Aytam/<span lang="ta" class="tamil-text">ஃ</span>
 						</label>
 						<label>
-							<input type="radio" name="vowel-extended-letters" value="2">
-							ZWNJ (used to separate conjuncts)
+							<input type="radio" name="vowel-extended-letters" value="2" class="grantha-elements">
+							ZWNJ (used to separate ligatures)
 						</label>
 					</fieldset>
 				</div>
@@ -96,12 +102,12 @@
 			<section id="consonant-section" hidden>
 				<h2>Consonants</h2>
 				<fieldset class="alpha-fieldset" onchange="processAlpha(event)">
-					<input type="checkbox" id="consonant-alpha-checkbox">
-					<label for="consonant-alpha-checkbox">Use the extended mode</label>
+					<input type="checkbox" role="switch" id="consonant-alpha-checkbox" class="grantha-elements">
+					<label for="consonant-alpha-checkbox">Use the additional Grantha letters</label>
 				</fieldset>
 				<div id="consonant-extended-section" hidden>
 					<fieldset class="extended-fieldset" onchange="processExtended(event)">
-						<legend>Extended letters</legend>
+						<legend>Additional Grantha letters</legend>
 						<label>
 							<input type="radio" name="consonant-extended-letters" value="0">
 							ja/<span lang="ta" class="tamil-text">ஜ</span>
@@ -133,15 +139,15 @@
 						</label>
 						<label>
 							<input type="radio" name="consonant-coarse-position" value="3">
-							r2a/<span lang="ta" class="tamil-text">ற</span> (Alveolar)
-						</label>
-						<label>
-							<input type="radio" name="consonant-coarse-position" value="4">
 							ta/<span lang="ta" class="tamil-text">த</span> (Dental)
 						</label>
 						<label>
-							<input type="radio" name="consonant-coarse-position" value="5">
+							<input type="radio" name="consonant-coarse-position" value="4">
 							pa/<span lang="ta" class="tamil-text">ப</span> (Labial)
+						</label>
+						<label>
+							<input type="radio" name="consonant-coarse-position" value="5">
+							r2a/<span lang="ta" class="tamil-text">ற</span> (Alveolar)
 						</label>
 					</fieldset>
 					<fieldset class="fine-fieldset" onchange="processFine(event, this)" hidden>
@@ -171,8 +177,8 @@
 							</div>
 						</div>
 						<label>
-							<input type="radio" name="consonant-fine-position">
-							Sibilant [Grantha]
+							<input type="radio" name="consonant-fine-position"  class="grantha-elements">
+							Sibilant
 						</label>
 					</fieldset>
 				</div>
