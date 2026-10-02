@@ -20,32 +20,6 @@ const sections = document.querySelectorAll('[id$="-section"]');
 const textplace = document.querySelector("textarea");
 let group, coarseValidity, fineFeatures, isIdaiyinamSubAppearing, pos;
 
-
-// Vibecoded a11y portion
-const mainForm = document.querySelector('form');
-const targets = mainForm.querySelectorAll('label, button, input');
-targets.forEach(element => {
-  element.addEventListener('pointerenter', (e) => {
-    if (e.pointerType === 'keyboard') return;
-
-    let controlToFocus = element;
-
-    // If hovering a <label>, resolve its linked or nested input
-    if (element.tagName === 'LABEL') {
-      const targetId = element.getAttribute('for');
-      controlToFocus = targetId 
-        ? document.getElementById(targetId) 
-        : element.querySelector('input, button, select, textarea');
-    }
-
-    // Focus the target control
-    if (controlToFocus && !controlToFocus.disabled && typeof controlToFocus.focus === 'function') {
-      controlToFocus.focus({ preventScroll: true });
-    }
-  });
-});
-
-
 function setMode(vowelOrConsonantMode)
 {
     if (vowelOrConsonantMode === "vowel-mode" && buttons[0].getAttribute("aria-pressed") === "true" ||
