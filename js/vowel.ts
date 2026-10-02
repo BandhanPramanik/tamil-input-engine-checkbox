@@ -1,7 +1,7 @@
 type VowelGroup = "0" | "1" | "2" | "4" | "5"; // 3 has been omitted to make calculations easier
 type FineFeaturesDec = "0" | "1" | "2";
 
-interface VowelGroupPosition {
+interface CoarsePosition {
 	gamma_2: boolean,
 	gamma_1: boolean,
 	gamma_0: boolean
@@ -22,7 +22,7 @@ interface FineFeatures {
 }
 
 // input processing
-export function rewriteVowelGroupPosition(vg: VowelGroup): VowelGroupPosition
+export function rewriteCoarsePosition(vg: VowelGroup): CoarsePosition
 {
 	let bin = Number(vg).toString(2).padStart(3, '0');
 	// think of the digit placement as normal units place, tens place
@@ -56,7 +56,7 @@ function findInvalidV({v_h}: CoarseValidity, {h, m}: FineFeatures): boolean
 	return isDiphthongForbidden;
 }
 
-export function findCoarseValidity({gamma_2}: VowelGroupPosition): CoarseValidity
+export function findCoarseValidity({gamma_2}: CoarsePosition): CoarseValidity
 {
 	const v_h = gamma_2;
 	return {v_h};
