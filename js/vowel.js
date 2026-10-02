@@ -1,5 +1,5 @@
 // input processing
-export function rewriteVowelGroupPosition(vg) {
+export function rewriteCoarsePosition(vg) {
     let bin = Number(vg).toString(2).padStart(3, '0');
     // think of the digit placement as normal units place, tens place
     // then, because the most significant digit is at the 0th index,

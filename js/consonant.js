@@ -1,5 +1,5 @@
 // input processsing
-export function rewriteVargaPosition(clus) {
+export function rewriteCoarsePosition(clus) {
     let bin = Number(clus).toString(2).padStart(3, '0');
     // think of the digit placement as normal units place, tens place
     // then, because the most significant digit is at the 0th index,
@@ -38,9 +38,9 @@ function findInvalidD({ c_i1, c_i0, c_s }, { s, i_1, i_0, m, v }) {
         isI1BlockingI0 || isSibilantForbidden || areSwitchesFlicked;
 }
 export function findCoarseValidity({ c_2, c_1, c_0 }) {
-    const c_i1 = c_1 && !c_2;
-    const c_i0 = c_0 && !c_1;
-    const c_s = !c_2 && (c_0 || c_1);
+    const c_i1 = (c_0 === c_2) && (c_1 !== c_0);
+    const c_i0 = !c_1 && (c_0 !== c_2);
+    const c_s = !((c_1 === c_0) || (c_2 && c_1));
     return { c_i1, c_i0, c_s };
 }
 function findFinePositions({ s, i_1, i_0, m, v }) {
