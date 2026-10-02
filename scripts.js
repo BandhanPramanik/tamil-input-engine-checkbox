@@ -7,19 +7,44 @@ loadModules().then(m => {
 
 async function loadModules()
 {
-    const consonantModule = await import("./js/consonant.js");
-    const vowelModule = await import("./js/vowel.js");
-	const renderModule = await import("./js/render.js");
+    const consonantModule = await import("./ts/consonant.js");
+    const vowelModule = await import("./ts/vowel.js");
+	const renderModule = await import("./ts/render.js");
     return {consonantModule, vowelModule, renderModule};
 }
 
-
 const buttons = document.querySelectorAll("[data-vowel-or-consonant-mode]");
+const errorContainer = document.getElementById("error-message");
+const granthaElements = document.querySelectorAll(".grantha-elements");
 const sections = document.querySelectorAll('[id$="-section"]');
 const textplace = document.querySelector("textarea");
-const errorContainer = document.getElementById("error-message");
-
 let group, coarseValidity, fineFeatures, isIdaiyinamSubAppearing, pos;
+
+
+// Vibecoded a11y portion
+const mainForm = document.querySelector('form');
+const targets = mainForm.querySelectorAll('label, button, input');
+targets.forEach(element => {
+  element.addEventListener('pointerenter', (e) => {
+    if (e.pointerType === 'keyboard') return;
+
+    let controlToFocus = element;
+
+    // If hovering a <label>, resolve its linked or nested input
+    if (element.tagName === 'LABEL') {
+      const targetId = element.getAttribute('for');
+      controlToFocus = targetId 
+        ? document.getElementById(targetId) 
+        : element.querySelector('input, button, select, textarea');
+    }
+
+    // Focus the target control
+    if (controlToFocus && !controlToFocus.disabled && typeof controlToFocus.focus === 'function') {
+      controlToFocus.focus({ preventScroll: true });
+    }
+  });
+});
+
 
 function setMode(vowelOrConsonantMode)
 {
@@ -44,20 +69,37 @@ function setMode(vowelOrConsonantMode)
     clearOptions();
 }
 
+function toggleCentamil(event)
+{
+    if (event.target.checked && document.getElementById("consonant-alpha-checkbox").checked === true)
+    {
+        uncheckExtended(false); // Grantha
+    }
+    granthaElements.forEach(granthaElement => {
+        granthaElement.disabled = event.target.checked;
+        if (event.target.checked)
+            granthaElement.setAttribute("aria-description", "Disabled because Centamil mode is active.");
+        else
+            granthaElement.removeAttribute("aria-description");
+    });
+}
+
 function clearOptions()
 {
     sections.forEach(section => uncheckRadios(section));
     setVisibilityIdaiyinamSubOptions(false);
-    uncheckExtended();
+    uncheckExtended(true); // Clear
     document.querySelectorAll(".fine-fieldset").forEach(section => section.hidden = true);
 }
 
-function uncheckExtended()
+function uncheckExtended(isGranthaOrClear)
 {
-    document.getElementById("vowel-alpha-checkbox").checked = false;
-    document.getElementById("vowel-extended-section").hidden = true;
-    document.getElementById("vowel-normal-section").hidden = false;
-
+    if (isGranthaOrClear) // if clear is chosen
+    {
+        document.getElementById("vowel-alpha-checkbox").checked = false;
+        document.getElementById("vowel-extended-section").hidden = true;
+        document.getElementById("vowel-normal-section").hidden = false;
+    }
     document.getElementById("consonant-alpha-checkbox").checked = false;
     document.getElementById("consonant-extended-section").hidden = true;
     document.getElementById("consonant-normal-section").hidden = false;
@@ -81,7 +123,7 @@ function appearFine(event, obj)
     if (event.target.name === "consonant-coarse-position")
     {
         // Phase: ACCUMULATING-1, varga state updated
-        const coarsePositions = consonantModule.rewriteVargaPosition(group);
+        const coarsePositions = consonantModule.rewriteCoarsePosition(group);
         // Phase: VALIDATING-1
         coarseValidity = consonantModule.findCoarseValidity(coarsePositions);
         // Will the sub-options of Idaiyinam appear if the user selects it?
@@ -96,7 +138,7 @@ function appearFine(event, obj)
     else if (event.target.name === "vowel-coarse-position")
     {
         // Phase: ACCUMULATING-1, vowel group / vowel class state updated
-        const coarsePositions = vowelModule.rewriteVowelGroupPosition(group);
+        const coarsePositions = vowelModule.rewriteCoarsePosition(group);
         // Phase: VALIDATING-1
         coarseValidity = vowelModule.findCoarseValidity(coarsePositions);
     }
