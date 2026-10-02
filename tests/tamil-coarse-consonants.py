@@ -7,7 +7,7 @@ variables = [c2, c1, c0]
 
 # change this [ci1, ci0, cs]. note that c_i accepts 00, 01, and 10 only. i accepts 00, 01, 11 only.
 # each inner list corresponds with the respective rows in the lookup table
-values = [[0, 0, 1, 1, 0, 0], [0, 1, 0, 0, 0, 1], [0, 1, 1, 1, 0, 0]]
+values = [[0, 0, 1, 0, 0, 1], [0, 1, 0, 0, 1, 0], [0, 1, 1, 0, 0, 1]]
 
 '''
 Explaining this part:
@@ -23,8 +23,10 @@ output = [i for i in range(2**length)]
 
 minterms = []
 for i in range(length):
+    # print()
     minterms.append([])
     for j, ob1 in enumerate(values[i]):
+        # print(f"{j:03b} | {ob1}")
         if ob1 == 1:
             minterms[i].append(output[j])
 
@@ -32,9 +34,9 @@ sop = []
 for i in minterms:
     sop.append(SOPform(variables, i))
 
-print("C_I1 =", simplify_logic(sop[0]))
-print("C_I0 =", simplify_logic(sop[1]))
-print("C_S =", simplify_logic(sop[2]))
+print("C_I1 =", simplify_logic(sop[0], form="dnf"))
+print("C_I0 =", simplify_logic(sop[1], form="dnf"))
+print("C_S =", simplify_logic(sop[2], form="dnf"))
 
 # This table is not designed with dontcares
 
