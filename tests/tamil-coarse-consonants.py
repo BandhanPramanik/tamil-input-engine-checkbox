@@ -18,8 +18,13 @@ embedded by the Boolean expression.
 Their meanings are entirely set by the developer 
 after looking at the letters present in those places.
 '''
-length = len(values[0]).bit_length()
-output = [i for i in range(2**length)]
+length = len(variables)
+
+# change this
+input_ = [i for i in range(len(values[0]))]
+
+dontcare_minterms = list(set(range(2**length)) - set(input_))
+dontcare_expr = SOPform(variables, dontcare_minterms)
 
 minterms = []
 for i in range(length):
@@ -28,15 +33,12 @@ for i in range(length):
     for j, ob1 in enumerate(values[i]):
         # print(f"{j:03b} | {ob1}")
         if ob1 == 1:
-            minterms[i].append(output[j])
+            minterms[i].append(input_[j])
 
 sop = []
 for i in minterms:
     sop.append(SOPform(variables, i))
 
-print("C_I1 =", simplify_logic(sop[0], form="dnf"))
+print("C_I1 =", simplify_logic(sop[0], dontcare=dontcare_expr, form="dnf"))
 print("C_I0 =", simplify_logic(sop[1], form="dnf"))
-print("C_S =", simplify_logic(sop[2], form="dnf"))
-
-# This table is not designed with dontcares
-
+print("C_S =", to_anf(simplify_logic(sop[2], dontcare=dontcare_expr)))
