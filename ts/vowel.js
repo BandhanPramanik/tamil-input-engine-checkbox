@@ -44,6 +44,8 @@ const FLAG_1 = 0b0010;
 const FLAG_0 = 0b0001;
 export function evalV(t, world) {
     if (t && "e0" in world) {
+        if (world.e1 && world.e0)
+            return 0b0111;
         return FLAG_3 |
             (world.e1 ? FLAG_1 : 0) |
             (world.e0 ? FLAG_0 : 0);
