@@ -43,7 +43,7 @@ function setMode(vowelOrConsonantMode)
     clearOptions();
 }
 
-function toggleCentamil(event)
+function toggleSentamizh(event)
 {
     if (event.target.checked && document.getElementById("consonant-alpha-checkbox").checked === true)
     {
@@ -52,7 +52,7 @@ function toggleCentamil(event)
     granthaElements.forEach(granthaElement => {
         granthaElement.disabled = event.target.checked;
         if (event.target.checked)
-            granthaElement.setAttribute("aria-description", "Disabled because Centamil mode is active.");
+            granthaElement.setAttribute("aria-description", "Disabled because Sentamizh mode is active.");
         else
             granthaElement.removeAttribute("aria-description");
     });
