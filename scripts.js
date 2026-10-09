@@ -416,6 +416,8 @@ function keyNavigation(keyUpper)
                 {
                     const collect1 = document.getElementsByName("fine-idaiyinam-position");
                     const selection1 = "LU".indexOf(keyUpper);
+                    if (selection1 === -1)
+                        return;
                     collect1[selection1].checked = true;
                         collect1[selection1].dispatchEvent(new Event('change', { bubbles: true }));
                 }
