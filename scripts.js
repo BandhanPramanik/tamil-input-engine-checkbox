@@ -50,7 +50,7 @@ window.addEventListener('keydown', (e) => {
         return;
     }
 
-    const keyUpper = event.key.toUpperCase();
+    const keyUpper = e.key.toUpperCase();
     keyNavigation(keyUpper);
 });
 
@@ -184,7 +184,7 @@ function processFine(event, obj)
     if (event.target.name === "consonant-fine-position")
     {
         const fineRadios = document.getElementsByName(event.target.name);
-        checked = [...fineRadios].map(radio => radio.checked);
+        const checked = [...fineRadios].map(radio => radio.checked);
         // Early return; Phase: VALIDATING-3, Conditional I_1 visibility
         if(event.target.id === "consonant-fine-idaiyinam" && isIdaiyinamSubAppearing)
         {
@@ -199,7 +199,7 @@ function processFine(event, obj)
            m: checked[1],
            v: checked[0]
        };
-       world = {
+       const world = {
            features: fineFeatures,
            validity: coarseValidity 
        }
@@ -331,7 +331,7 @@ function keyNavigation(keyUpper)
            checkbox.dispatchEvent(new Event('change', { bubbles: true }));
         }
         // Vowel extended select
-        if (document.getElementById('vowel-alpha-checkbox').checked)
+        if (document.getElementById('vowel-alpha-checkbox').checked && "JKL".indexOf(keyUpper) >= 0)
         {
             if (keyUpper === 'L' && !sentamizhToggle)
              return;
@@ -381,7 +381,7 @@ function keyNavigation(keyUpper)
         }
         // No need to think about sentamizhToggle if this is already selected
         // Consonant extended select
-        if (document.getElementById('consonant-alpha-checkbox').checked)
+        if (document.getElementById('consonant-alpha-checkbox').checked && "JKL".indexOf(keyUpper) >= 0)
         { 
             const collect = document.getElementsByName('consonant-extended-letters');
             const selection = "JKL".indexOf(keyUpper);
