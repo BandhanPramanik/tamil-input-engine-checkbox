@@ -20,11 +20,11 @@ const granthaElements = document.querySelectorAll(".grantha-elements");
 const sections = document.querySelectorAll('[id$="-section"]');
 const textplace = document.querySelector("textarea");
 // For keyboard navigation eventListener
-const sentamizhToggle = false;
 const diacriticFieldset = document.querySelector('.diacritic-fieldset');
 const vowelFineFieldset = document.querySelector('#vowel-normal-section > .fine-fieldset')
 const consonantFineFieldset = document.querySelector('#consonant-normal-section > .fine-fieldset');
 const idaiyinamDiv = document.getElementById("idaiyinam-sub-options");
+let sentamizhToggle = false;
 let group, coarseValidity, fineFeatures, isIdaiyinamSubAppearing, pos;
 
 // Keyboard navigation
