@@ -9,16 +9,50 @@ async function loadModules()
 {
     const consonantModule = await import("./ts/consonant.js");
     const vowelModule = await import("./ts/vowel.js");
-	const renderModule = await import("./ts/render.js");
+    const renderModule = await import("./ts/render.js");
     return {consonantModule, vowelModule, renderModule};
 }
 
+// For the other methods
 const buttons = document.querySelectorAll("[data-vowel-or-consonant-mode]");
 const errorContainer = document.getElementById("error-message");
 const granthaElements = document.querySelectorAll(".grantha-elements");
 const sections = document.querySelectorAll('[id$="-section"]');
 const textplace = document.querySelector("textarea");
+// For keyboard navigation eventListener
+const sentamizhToggle = false;
+const diacriticFieldset = document.querySelector('.diacritic-fieldset');
+const vowelFineFieldset = document.querySelector('#vowel-normal-section > .fine-fieldset')
+const consonantFineFieldset = document.querySelector('#consonant-normal-section > .fine-fieldset');
+const idaiyinamDiv = document.getElementById("idaiyinam-sub-options");
 let group, coarseValidity, fineFeatures, isIdaiyinamSubAppearing, pos;
+
+// Keyboard navigation
+// didn't even look at the docs for keyNavigation(), vibecoded the following eventListeners though
+const activeKeys = new Set();
+
+window.addEventListener('keyup', (e) => {
+    activeKeys.delete(e.code);
+});
+
+// Clear keys if the browser window loses focus
+window.addEventListener('blur', () => {
+    activeKeys.clear();
+});
+
+window.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'TEXTAREA')
+        return;
+    activeKeys.add(e.code);
+
+    // Early return if more than 1 key is currently pressed
+    if (activeKeys.size > 1) {
+        return;
+    }
+
+    const keyUpper = event.key.toUpperCase();
+    keyNavigation(keyUpper);
+});
 
 function setMode(vowelOrConsonantMode)
 {
@@ -43,6 +77,7 @@ function setMode(vowelOrConsonantMode)
     clearOptions();
 }
 
+
 function toggleSentamizh(event)
 {
     if (event.target.checked && document.getElementById("consonant-alpha-checkbox").checked === true)
@@ -51,6 +86,7 @@ function toggleSentamizh(event)
     }
     granthaElements.forEach(granthaElement => {
         granthaElement.disabled = event.target.checked;
+        sentamizhToggle = event.target.checked;
         if (event.target.checked)
             granthaElement.setAttribute("aria-description", "Disabled because Sentamizh mode is active.");
         else
@@ -62,6 +98,7 @@ function clearOptions()
 {
     sections.forEach(section => uncheckRadios(section));
     setVisibilityIdaiyinamSubOptions(false);
+    document.querySelector('.diacritic-fieldset').hidden = true;
     uncheckExtended(true); // Clear
     document.querySelectorAll(".fine-fieldset").forEach(section => section.hidden = true);
 }
@@ -141,7 +178,7 @@ function processAlpha(event)
    } 
 }
 
-function processFine(event)
+function processFine(event, obj)
 {
     // Consonant
     if (event.target.name === "consonant-fine-position")
@@ -194,6 +231,7 @@ if (event.target.name === "vowel-fine-position")
     const value = event.target.value;
     // Phase: ACCUMULATING-2
     fineFeatures = vowelModule.rewriteFineFeatures(value);
+    obj.nextElementSibling.hidden = false;
 }
 }
 
@@ -270,4 +308,118 @@ function handleInvalid(isInvalid)
             radio.removeAttribute("aria-describedby");
         }
     });
+}
+
+function keyNavigation(keyUpper)
+{
+    // Mode selection
+    if (keyUpper === 'V')
+    {
+        if (buttons[0].getAttribute("aria-pressed") === "false")
+            setMode("vowel-mode");
+        else
+            setMode("consonant-mode");
+    }
+    // Vowels
+    if (buttons[0].getAttribute("aria-pressed") === "true")
+    {
+        // Vowel extended toggle
+        if (keyUpper === 'A')
+        {
+           const checkbox = document.getElementById("vowel-alpha-checkbox");
+           checkbox.checked = !checkbox.checked;
+           checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        // Vowel extended select
+        if (document.getElementById('vowel-alpha-checkbox').checked)
+        {
+            if (keyUpper === 'L' && !sentamizhToggle)
+             return;
+            const collect = document.getElementsByName('vowel-extended-letters');
+            const selection = "JKL".indexOf(keyUpper);
+            collect[selection].checked = true;
+            collect[selection].dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        else
+        // Vowel normal select
+        {
+            // Vowel coarse select
+            if ("FDSRE".indexOf(keyUpper) >= 0)
+            {
+                const collect = document.getElementsByName("vowel-coarse-position");
+                const selection = "FDSRE".indexOf(keyUpper);
+                collect[selection].checked = true;
+                collect[selection].dispatchEvent(new Event('change', { bubbles: true }));
+            }
+                // Vowel fine select
+            if ("JKL".indexOf(keyUpper) >= 0 && vowelFineFieldset.hidden === false)
+            {
+                const collect = document.getElementsByName("vowel-fine-position");
+                const selection = "JKL".indexOf(keyUpper);
+                collect[selection].checked = true;
+                collect[selection].dispatchEvent(new Event('change', { bubbles: true }));
+            }
+                // Vowel diacritic select
+            if ('XC'.indexOf(keyUpper) >= 0 && diacriticFieldset.hidden === false)
+            {
+                const collect = document.getElementsByName("vowel-diacritic");
+                const selection = "XC".indexOf(keyUpper);
+                collect[selection].checked = true;
+                collect[selection].dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        }
+    }
+    else
+    // Consonants
+    {
+        // Consonant extended toggle
+        if (keyUpper === 'A' && !sentamizhToggle)
+        {
+            const checkbox = document.getElementById("consonant-alpha-checkbox")
+            checkbox.checked = !checkbox.checked;
+            checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        // No need to think about sentamizhToggle if this is already selected
+        // Consonant extended select
+        if (document.getElementById('consonant-alpha-checkbox').checked)
+        { 
+            const collect = document.getElementsByName('consonant-extended-letters');
+            const selection = "JKL".indexOf(keyUpper);
+            collect[selection].checked = true;
+            collect[selection].dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        else
+        // Consonant normal select
+        {
+            // Consonant coarse select
+            if ("FDSREW".indexOf(keyUpper) >= 0)
+            {
+                const collect = document.getElementsByName("consonant-coarse-position");
+                const selection = "FDSREW".indexOf(keyUpper);
+                collect[selection].checked = true;
+                collect[selection].dispatchEvent(new Event('change', { bubbles: true }));
+            }
+                    // Consonant fine select
+            if ("JKLUI".indexOf(keyUpper) >= 0 && consonantFineFieldset.hidden === false)
+            {
+                if (keyUpper === 'I' && !sentamizhToggle)
+                    return;
+                const collect = document.getElementsByName("consonant-fine-position");
+                let selection = "JKLUI".indexOf(keyUpper);
+                if (keyUpper === 'U' || keyUpper === 'I')
+                    selection--;
+                collect[selection].checked = true;
+                collect[selection].dispatchEvent(new Event('change', { bubbles: true }));
+                if (idaiyinamDiv.hidden === true)
+                    return;
+                else
+                {
+                    const collect1 = document.getElementsByName("fine-idaiyinam-position");
+                    const selection1 = "LU".indexOf(keyUpper);
+                    collect1[selection1].checked = true;
+                        collect1[selection1].dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            }
+        }
+    }
 }

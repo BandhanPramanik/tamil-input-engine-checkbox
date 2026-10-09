@@ -23,19 +23,19 @@
 				</label>
 			</fieldset>
 			<fieldset id="mode-selection">
-				<legend>Mode selection</legend>
-				<button type="button" data-vowel-or-consonant-mode="vowel-mode" onclick="setMode(this.dataset.vowelOrConsonantMode)">Vowels and others</button>
-				<button type="button" data-vowel-or-consonant-mode="consonant-mode" onclick="setMode(this.dataset.vowelOrConsonantMode)">Consonants</button>
+				<legend>Mode selection (press V)</legend>
+				<button type="button" data-vowel-or-consonant-mode="vowel-mode" aria-pressed="true" onclick="setMode(this.dataset.vowelOrConsonantMode)">Vowels and others</button>
+				<button type="button" data-vowel-or-consonant-mode="consonant-mode" aria-pressed="false" onclick="setMode(this.dataset.vowelOrConsonantMode)">Consonants</button>
 			</fieldset>
 			<section id="vowel-section">
 				<h2>Vowels and others</h2>
 				<fieldset class="alpha-fieldset" id="vowel-alpha-fieldset" onchange="processAlpha(event)">
 					<input type="checkbox" role="switch" id="vowel-alpha-checkbox">
-					<label for="vowel-alpha-checkbox">Use the other characters</label>
+					<label for="vowel-alpha-checkbox">Use the other characters (press A)</label>
 				</fieldset>
 				<div id="vowel-extended-section" hidden>
 					<fieldset class="extended-fieldset" onchange="processExtended(event)">
-						<legend>Other characters</legend>
+						<legend>Other characters (JKL)</legend>
 						<label>
 							<input type="radio" name="vowel-extended-letters" value="0">
 							Pulli/<span lang="ta" class="tamil-text">&#x200c;&#x0bcd;</span>
@@ -52,7 +52,7 @@
 				</div>
 				<div id="vowel-normal-section">
 					<fieldset class="coarse-fieldset" onchange="appearFine(event, this)">
-						<legend>Coarse position</legend>
+						<legend>Coarse position (FDSRE)</legend>
 						<label>
 							<input type="radio" name="vowel-coarse-position" value="0">
 							a/<span lang="ta" class="tamil-text">அ</span>
@@ -74,8 +74,8 @@
 							O/<span lang="ta" class="tamil-text">ஒ</span>
 						</label>
 					</fieldset>
-					<fieldset class="fine-fieldset" onchange="processFine(event)" hidden>
-						<legend>Fine position</legend>
+					<fieldset class="fine-fieldset" onchange="processFine(event, this)" hidden>
+						<legend>Fine position (JKL)</legend>
 						<label>
 							<input type="radio" name="vowel-fine-position" value="0">
 							Normal Monophthong
@@ -89,12 +89,12 @@
 							Diphthong
 						</label>
 					</fieldset>
-					<fieldset class="diacritic-fieldset" onchange="processDiacritic(event)">
-						<legend>Diacritic or Standalone Vowel</legend>
-						<input type="radio" id="standalone-vowel" name="vowel-diacritic" value="0">
-						<label for="standalone-vowel">Standalone</label>
+					<fieldset class="diacritic-fieldset" onchange="processDiacritic(event)" hidden>
+						<legend>Diacritic or Standalone Vowel (XC)</legend>
 						<input type="radio" id="diacritic-vowel" name="vowel-diacritic" value="1">
 						<label for="diacritic-vowel">Diacritic</label>
+						<input type="radio" id="standalone-vowel" name="vowel-diacritic" value="0">
+						<label for="standalone-vowel">Standalone</label>
 					</fieldset>
 				</div>
 			</section>
@@ -103,11 +103,11 @@
 				<h2>Consonants</h2>
 				<fieldset class="alpha-fieldset" onchange="processAlpha(event)">
 					<input type="checkbox" role="switch" id="consonant-alpha-checkbox" class="grantha-elements">
-					<label for="consonant-alpha-checkbox">Use the additional Grantha letters</label>
+					<label for="consonant-alpha-checkbox">Use the additional Grantha letters (press A)</label>
 				</fieldset>
 				<div id="consonant-extended-section" hidden>
 					<fieldset class="extended-fieldset" onchange="processExtended(event)">
-						<legend>Additional Grantha letters</legend>
+						<legend>Additional Grantha letters (JKL)</legend>
 						<label>
 							<input type="radio" name="consonant-extended-letters" value="0">
 							ja/<span lang="ta" class="tamil-text">ஜ</span>
@@ -124,7 +124,7 @@
 				</div>	
 				<div id="consonant-normal-section">
 					<fieldset class="coarse-fieldset" onchange="appearFine(event, this)">
-						<legend>Coarse position</legend>
+						<legend>Coarse position (FDSREW)</legend>
 						<label>
 							<input type="radio" name="consonant-coarse-position" value="0">
 							ka/<span lang="ta" class="tamil-text">க</span> (Velar)
@@ -151,7 +151,7 @@
 						</label>
 					</fieldset>
 					<fieldset class="fine-fieldset" onchange="processFine(event, this)" hidden>
-						<legend>Fine position</legend>
+						<legend>Fine position (JKLUI)</legend>
 						<label>
 							<input type="radio" name="consonant-fine-position">
 							Vallinam
@@ -184,7 +184,7 @@
 				</div>
 			</section>
 		</form>
-		<textarea 
+		<textarea
 		name="result" 
 		lang="ta" 
 		class="tamil-text"
