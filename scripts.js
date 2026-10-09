@@ -25,8 +25,7 @@ const vowelFineFieldset = document.querySelector('#vowel-normal-section > .fine-
 const consonantFineFieldset = document.querySelector('#consonant-normal-section > .fine-fieldset');
 const idaiyinamDiv = document.getElementById("idaiyinam-sub-options");
 let sentamizhToggle = false;
-let group, coarseValidity, fineFeatures, isIdaiyinamSubAppearing, pos;
-
+let group, coarseValidity, fineFeatures, isIdaiyinamSubAppearing, pos, checked;
 // Keyboard navigation
 // didn't even look at the docs for keyNavigation(), vibecoded the following eventListeners though
 const activeKeys = new Set();
@@ -180,7 +179,7 @@ function processAlpha(event)
 
 function processFine(event, obj)
 {
-    let checked;
+    
     // Consonant
     if (event.target.name === "consonant-fine-position")
     {
