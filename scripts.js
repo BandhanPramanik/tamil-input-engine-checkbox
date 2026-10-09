@@ -84,9 +84,9 @@ function toggleSentamizh(event)
     {
         uncheckExtended(false); // Grantha
     }
+    sentamizhToggle = event.target.checked;
     granthaElements.forEach(granthaElement => {
         granthaElement.disabled = event.target.checked;
-        sentamizhToggle = event.target.checked;
         if (event.target.checked)
             granthaElement.setAttribute("aria-description", "Disabled because Sentamizh mode is active.");
         else
