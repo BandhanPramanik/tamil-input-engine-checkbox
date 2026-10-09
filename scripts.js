@@ -180,11 +180,12 @@ function processAlpha(event)
 
 function processFine(event, obj)
 {
+    let checked;
     // Consonant
     if (event.target.name === "consonant-fine-position")
     {
         const fineRadios = document.getElementsByName(event.target.name);
-        const checked = [...fineRadios].map(radio => radio.checked);
+        checked = [...fineRadios].map(radio => radio.checked);
         // Early return; Phase: VALIDATING-3, Conditional I_1 visibility
         if(event.target.id === "consonant-fine-idaiyinam" && isIdaiyinamSubAppearing)
         {
