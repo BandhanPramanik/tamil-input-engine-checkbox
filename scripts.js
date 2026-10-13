@@ -390,7 +390,6 @@ function keyNavigation(keyUpper)
             // Consonant fine select
             if ("JKLUI".indexOf(keyUpper) >= 0 && consonantFineFieldset.hidden === false)
             {
-                const collect = document.getElementsByName("consonant-fine-position");
                 const allFineLetters = {
                     'J': 0,
                     'K': 1,
@@ -404,7 +403,6 @@ function keyNavigation(keyUpper)
                     return;
                 else
                 {
-                    const collect1 = document.getElementsByName("fine-idaiyinam-position");
                     const selection1 = "LU".indexOf(keyUpper);
                     pick("fine-idaiyinam-position", selection1);
                 }
