@@ -54,6 +54,9 @@ window.addEventListener('keyup', (e) => {
 // Clear keys if the browser window loses focus
 window.addEventListener('blur', () => { held.clear(); stroke.clear(); });
 
+textplace.addEventListener('keydown', (e) => {
+    if (e.code === 'Escape') textplace.blur();
+});
 
 function setMode(vowelOrConsonantMode)
 {
@@ -281,7 +284,7 @@ function appendToTextarea(output)
         {
             handleInvalid(false);
             errorContainer.textContent = "";
-            textplace.value += output;
+            textplace.setRangeText(output, textplace.selectionStart, textplace.selectionEnd, 'end');
             clearOptions();
         }
     }
