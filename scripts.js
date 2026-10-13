@@ -26,32 +26,34 @@ const consonantFineFieldset = document.querySelector('#consonant-normal-section 
 const idaiyinamDiv = document.getElementById("idaiyinam-sub-options");
 let sentamizhToggle = false;
 let group, coarseValidity, fineFeatures, isIdaiyinamSubAppearing, pos, checked;
+
 // Keyboard navigation
 // didn't even look at the docs for keyNavigation(), vibecoded the following eventListeners though
-const activeKeys = new Set();
+const ORDER = "VAFDSREWJKLUIXC";
+const stroke = new Set();
+const held = new Set();
+
+window.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'TEXTAREA' || e.repeat || e.ctrlKey || e.metaKey || e.altKey)
+       return;
+    if (!e.code.startsWith('Key'))
+        return;
+    const k = e.code.slice(3);
+    held.add(k); stroke.add(k);
+});
 
 window.addEventListener('keyup', (e) => {
-    activeKeys.delete(e.code);
+    held.delete(e.code.slice(3));
+    if(held.size === 0 && stroke.size)
+    {
+        [...stroke].sort((a, b) => ORDER.indexOf(a) - ORDER.indexOf(b)).forEach(keyNavigation);
+        stroke.clear();
+    }
 });
 
 // Clear keys if the browser window loses focus
-window.addEventListener('blur', () => {
-    activeKeys.clear();
-});
+window.addEventListener('blur', () => { held.clear(); stroke.clear(); });
 
-window.addEventListener('keydown', (e) => {
-    if (e.target.tagName === 'TEXTAREA')
-        return;
-    activeKeys.add(e.code);
-
-    // Early return if more than 1 key is currently pressed
-    if (activeKeys.size > 1) {
-        return;
-    }
-
-    const keyUpper = e.key.toUpperCase();
-    keyNavigation(keyUpper);
-});
 
 function setMode(vowelOrConsonantMode)
 {
@@ -333,12 +335,8 @@ function keyNavigation(keyUpper)
         // Vowel extended select
         if (document.getElementById('vowel-alpha-checkbox').checked && "JKL".indexOf(keyUpper) >= 0)
         {
-            if (keyUpper === 'L' && !sentamizhToggle)
-             return;
-            const collect = document.getElementsByName('vowel-extended-letters');
             const selection = "JKL".indexOf(keyUpper);
-            collect[selection].checked = true;
-            collect[selection].dispatchEvent(new Event('change', { bubbles: true }));
+            pick("vowel-extended-letters", selection);
         }
         else
         // Vowel normal select
@@ -346,26 +344,20 @@ function keyNavigation(keyUpper)
             // Vowel coarse select
             if ("FDSRE".indexOf(keyUpper) >= 0)
             {
-                const collect = document.getElementsByName("vowel-coarse-position");
                 const selection = "FDSRE".indexOf(keyUpper);
-                collect[selection].checked = true;
-                collect[selection].dispatchEvent(new Event('change', { bubbles: true }));
+                pick("vowel-coarse-position", selection);
             }
                 // Vowel fine select
             if ("JKL".indexOf(keyUpper) >= 0 && vowelFineFieldset.hidden === false)
             {
-                const collect = document.getElementsByName("vowel-fine-position");
                 const selection = "JKL".indexOf(keyUpper);
-                collect[selection].checked = true;
-                collect[selection].dispatchEvent(new Event('change', { bubbles: true }));
+                pick("vowel-fine-position", selection);
             }
                 // Vowel diacritic select
             if ('XC'.indexOf(keyUpper) >= 0 && diacriticFieldset.hidden === false)
             {
-                const collect = document.getElementsByName("vowel-diacritic");
                 const selection = "XC".indexOf(keyUpper);
-                collect[selection].checked = true;
-                collect[selection].dispatchEvent(new Event('change', { bubbles: true }));
+                pick("vowel-diacritic", selection);
             }
         }
     }
@@ -383,10 +375,8 @@ function keyNavigation(keyUpper)
         // Consonant extended select
         if (document.getElementById('consonant-alpha-checkbox').checked && "JKL".indexOf(keyUpper) >= 0)
         { 
-            const collect = document.getElementsByName('consonant-extended-letters');
             const selection = "JKL".indexOf(keyUpper);
-            collect[selection].checked = true;
-            collect[selection].dispatchEvent(new Event('change', { bubbles: true }));
+            pick("consonant-extended-letters", selection);
         }
         else
         // Consonant normal select
@@ -394,34 +384,47 @@ function keyNavigation(keyUpper)
             // Consonant coarse select
             if ("FDSREW".indexOf(keyUpper) >= 0)
             {
-                const collect = document.getElementsByName("consonant-coarse-position");
                 const selection = "FDSREW".indexOf(keyUpper);
-                collect[selection].checked = true;
-                collect[selection].dispatchEvent(new Event('change', { bubbles: true }));
+                pick("consonant-coarse-position", selection);
             }
-                    // Consonant fine select
+            // Consonant fine select
             if ("JKLUI".indexOf(keyUpper) >= 0 && consonantFineFieldset.hidden === false)
             {
-                if (keyUpper === 'I' && !sentamizhToggle)
-                    return;
                 const collect = document.getElementsByName("consonant-fine-position");
-                let selection = "JKLUI".indexOf(keyUpper);
-                if (keyUpper === 'U' || keyUpper === 'I')
-                    selection--;
-                collect[selection].checked = true;
-                collect[selection].dispatchEvent(new Event('change', { bubbles: true }));
+                const allFineLetters = {
+                    'J': 0,
+                    'K': 1,
+                    'L': 2,
+                    'U': 2,
+                    'I': 3
+                };
+                const selection = allFineLetters[keyUpper];
+                pick("consonant-fine-position", selection);
                 if (idaiyinamDiv.hidden === true)
                     return;
                 else
                 {
                     const collect1 = document.getElementsByName("fine-idaiyinam-position");
                     const selection1 = "LU".indexOf(keyUpper);
-                    if (selection1 === -1)
-                        return;
-                    collect1[selection1].checked = true;
-                        collect1[selection1].dispatchEvent(new Event('change', { bubbles: true }));
+                    pick("fine-idaiyinam-position", selection1);
                 }
             }
         }
     }
+}
+
+// Keyboard navigation code, used to trigger events from keys
+// recommended by Claude after seeing my repeating code
+function pick(name, i)
+{
+    const collect = document.getElementsByName(name)[i];
+    if (!collect) return;
+    if (collect.disabled)
+    {
+        errorContainer.textContent = "Error: Not available in Sentamizh mode.";
+        clearOptions();
+        return;
+    }
+    collect.checked = true;
+    collect.dispatchEvent(new Event('change', { bubbles: true }));
 }
