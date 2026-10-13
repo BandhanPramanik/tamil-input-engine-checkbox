@@ -36,6 +36,12 @@ const held = new Set();
 window.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'TEXTAREA' || e.repeat || e.ctrlKey || e.metaKey || e.altKey)
        return;
+    // in the global keydown handler, right after the TEXTAREA check
+    if (e.code === 'Enter' && e.target === document.body) {
+        e.preventDefault();
+        textplace.focus();
+        return;
+    }
     if (!e.code.startsWith('Key'))
         return;
     const k = e.code.slice(3);
