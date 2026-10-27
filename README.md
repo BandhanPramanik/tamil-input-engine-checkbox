@@ -1,5 +1,7 @@
 # tamil-input-engine-checkbox
 
+[**Check this out at first**](https://triangulatedexistence.mataroa.blog/blog/a-starter-guide-to-taravinyas/)
+
 This website is inspired from the preprint "[Taravinyas: Mapping Paninian Phonology to Digital Logic for Continuous Touchscreen Input](https://doi.org/10.5281/zenodo.20467634)." The following website is the implementation of the input engine, in the modern Tamil script.
 
 Note: On Android, Chromium-based browsers may dismiss the keyboard when switching input layouts; Firefox for Android works as expected.
