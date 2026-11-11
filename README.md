@@ -8,6 +8,14 @@ This website is inspired from the preprint "[Taravinyas: Mapping Paninian Phonol
 
 Note: On Android, Chromium-based browsers may dismiss the keyboard when switching input layouts; Firefox for Android works as expected.
 
+## Description of the folders
+
+- css: All the CSS used, stored locally
+- fonts: All the fonts used, stored locally
+- uml-and-flow: The flow I use to make people understand my website and the mathematical framework
+- ts: All the TS files in raw form and in JS form.
+- tests: The sympy evaluator used to crunch out the boolean equations. Used for cross-checking the expressions in the TS files.
+
 ## Note to self
 
 Please compile Typescript to JS after every code change.

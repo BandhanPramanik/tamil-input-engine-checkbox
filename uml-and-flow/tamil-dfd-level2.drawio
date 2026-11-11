@@ -1,0 +1,111 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="Yghg5jxwyw_GBwFbH0KI">
+    <mxGraphModel dx="1229" dy="693" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="S764ILpc1LqtChLB22oz-11" edge="1" parent="1" source="S764ILpc1LqtChLB22oz-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="S764ILpc1LqtChLB22oz-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-12" connectable="0" parent="S764ILpc1LqtChLB22oz-11" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;Other variables, Fine Features,&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;Coarse Variables&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="0.3557" y="-1" as="geometry">
+            <mxPoint x="33" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-1" parent="1" style="html=1;dashed=0;whiteSpace=wrap;shape=partialRectangle;right=0;fontSize=16;" value="State Variables" vertex="1">
+          <mxGeometry height="73.8" width="246" x="100" y="538.1" as="geometry" />
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-17" edge="1" parent="1" source="S764ILpc1LqtChLB22oz-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="S764ILpc1LqtChLB22oz-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-18" connectable="0" parent="S764ILpc1LqtChLB22oz-17" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;div&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Fine Features,&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Coarse Variables&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="0.2638" y="-2" as="geometry">
+            <mxPoint x="-37" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-29" edge="1" parent="1" source="S764ILpc1LqtChLB22oz-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="S764ILpc1LqtChLB22oz-24">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="761" y="207.43" />
+              <mxPoint x="761" y="761.57" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-30" connectable="0" parent="S764ILpc1LqtChLB22oz-29" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Other variables&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.0122" as="geometry">
+            <mxPoint x="-31" y="-149" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-3" parent="1" style="shape=ellipse;html=1;dashed=0;whiteSpace=wrap;aspect=fixed;perimeter=ellipsePerimeter;fontSize=16;" value="&lt;div&gt;Checking whether in normal or&lt;/div&gt;&lt;div&gt;extended set&lt;/div&gt;" vertex="1">
+          <mxGeometry height="143" width="143" x="516" y="136" as="geometry" />
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-19" edge="1" parent="1" source="S764ILpc1LqtChLB22oz-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="S764ILpc1LqtChLB22oz-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="443.86" y="444.14" />
+              <mxPoint x="443.86" y="951.43" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-21" connectable="0" parent="S764ILpc1LqtChLB22oz-19" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Invalidity&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.1295" y="3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-25" edge="1" parent="1" source="S764ILpc1LqtChLB22oz-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="S764ILpc1LqtChLB22oz-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-26" connectable="0" parent="S764ILpc1LqtChLB22oz-25" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;Validity,&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;FineFeatures&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="0.2034" y="-4" as="geometry">
+            <mxPoint x="-7" y="-23" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-4" parent="1" style="shape=ellipse;html=1;dashed=0;whiteSpace=wrap;aspect=fixed;perimeter=ellipsePerimeter;fontSize=16;" value="Check Invalid result" vertex="1">
+          <mxGeometry height="143" width="143" x="516" y="322" as="geometry" />
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-27" edge="1" parent="1" source="S764ILpc1LqtChLB22oz-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;" target="S764ILpc1LqtChLB22oz-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="492.43" y="621.14" />
+              <mxPoint x="492.43" y="910.86" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-28" connectable="0" parent="S764ILpc1LqtChLB22oz-27" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Fine Position&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" x="0.3767" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-6" parent="1" style="shape=ellipse;html=1;dashed=0;whiteSpace=wrap;aspect=fixed;perimeter=ellipsePerimeter;fontSize=16;" value="findFinePositions()" vertex="1">
+          <mxGeometry height="143" width="143" x="516" y="499" as="geometry" />
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-8" parent="1" style="shape=ellipse;html=1;dashed=0;whiteSpace=wrap;aspect=fixed;perimeter=ellipsePerimeter;fontSize=16;" value="&lt;div&gt;Convert&lt;/div&gt;&lt;div&gt;fine positions&lt;/div&gt;&lt;div&gt;to F&lt;/div&gt;" vertex="1">
+          <mxGeometry height="115" width="115" x="530" y="894" as="geometry" />
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-31" edge="1" parent="1" source="S764ILpc1LqtChLB22oz-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" target="S764ILpc1LqtChLB22oz-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="638.14" y="910.86" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-32" connectable="0" parent="S764ILpc1LqtChLB22oz-31" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Fine Position&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.2262" y="3" as="geometry">
+            <mxPoint x="8" y="8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-24" parent="1" style="shape=ellipse;html=1;dashed=0;whiteSpace=wrap;aspect=fixed;perimeter=ellipsePerimeter;fontSize=16;" value="findExtended()" vertex="1">
+          <mxGeometry height="143" width="143" x="516" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-33" edge="1" parent="1" source="S764ILpc1LqtChLB22oz-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.364;entryY=1.011;entryDx=0;entryDy=0;entryPerimeter=0;" target="S764ILpc1LqtChLB22oz-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="S764ILpc1LqtChLB22oz-34" connectable="0" parent="S764ILpc1LqtChLB22oz-33" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Resultant Fine Position&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.1726" y="-5" as="geometry">
+            <mxPoint x="91" y="4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

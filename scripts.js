@@ -148,11 +148,11 @@ function appearFine(event, obj)
         // Phase: VALIDATING-1
         coarseValidity = consonantModule.findCoarseValidity(coarsePositions);
         // Will the sub-options of Idaiyinam appear if the user selects it?
-        // Prep for VALIDATING-3
+        // PREP for VALIDATING-3 (partially evaluating stuff here)
         // also, c_i becoming 10 is what we want only
         isIdaiyinamSubAppearing = coarseValidity.c_i1 == true && coarseValidity.c_i0 == false;
         // If Idaiyinam sub options appeared for the previous group / varga 
-        // but won't appear for this one, hide it
+        // but won't appear for this one, hide it (part of wiping logic, not within VALIDATING)
         if (!isIdaiyinamSubAppearing)
             setVisibilityIdaiyinamSubOptions(false);
     }
