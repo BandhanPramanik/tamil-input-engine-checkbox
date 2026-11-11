@@ -1,6 +1,6 @@
 # tamil-input-engine-checkbox
 
-[**Recommended**: Check this out if you want to understand what this project actually does.](https://www.reddit.com/r/Btechtards/s/zbpLvgvEab)
+[**Recommended**: Check this out if you want to understand what this project actually does.](https://triangulatedexistence.mataroa.blog/blog/a-proposal-for-indic-keyboard-interfaces/)
 
 This website is inspired from the preprint "[Taravinyas: Mapping Paninian Phonology to Digital Logic for Continuous Touchscreen Input](https://doi.org/10.5281/zenodo.20467634)." The following website is the implementation of the input engine, in the modern Tamil script. [Check out this guide I made in order to navigate the website.](https://triangulatedexistence.mataroa.blog/blog/a-starter-guide-to-taravinyas/)
 
