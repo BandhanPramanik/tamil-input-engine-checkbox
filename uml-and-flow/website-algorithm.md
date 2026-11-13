@@ -1,4 +1,5 @@
-[Note: Used Socratic method with Claude for this, then asked it to write the algorithm I need to make the flowchart. After making the flowchart and building the website, I felt like making all the diagrams align closer to the actual implementation of the website, without losing the algorithm's "general" nature. The document below is the modified algorithm that happens to closely align with my website.] 
+[Note: Used the Socratic method with Claude for this. After that, I asked it to write the algorithm for making the flowchart. After making the flowchart and building the website, I felt like making all the diagrams align closer to the actual implementation of the website, without losing the algorithm's "general" nature. The document below is the modified algorithm that happens to closely align with my website's flow.] 
+
 ### **Entry Point**
 ```
 START
