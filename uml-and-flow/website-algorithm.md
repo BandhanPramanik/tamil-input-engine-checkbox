@@ -38,7 +38,7 @@ VALIDATING-3: Conditional I_1 visibility (CONSONANT ONLY and if c_i1 = 1 AND c_i
 ACCUMULATING-2: Fine feature state updated
 ACCUMULATING-3: Diacritic or Standalone vowel (VOWEL ONLY!!!)
   ↓
-VALIDATING-4: evalD() / evalV() → output character
+VALIDATING-4 & VALIDATING-5: evalD() / evalV() → output character
   ↓
 [Check commit condition]
   ├─ Condition: Not "INVALID"
@@ -65,7 +65,7 @@ IDLE (Back to cluster radios only)
 ```
 [User selects Ja, Ha, or Ksha radio]
   ↓
-VALIDATING-4: evalD() → output character
+VALIDATING-4 & VALIDATING-5: evalD() → output character
   ↓
 [Bypass any validation entirely]
   ↓
@@ -75,7 +75,7 @@ COMMIT immediately
 ```
 [User selects Pulli, Aytam or ZWNJ radio]
   ↓
-VALIDATING-4: evalV() → output character
+VALIDATING-4 & VALIDATING-5: evalV() → output character
   ↓
 [Bypass any validation or any diacritic stuff entirely]
   ↓
