@@ -60,16 +60,7 @@ IDLE (Back to cluster radios only)
 
 ### **Special Cases (Branching)**
 
-**Case 1: User changes cluster mid-fine-features**
-```
-[User re-selects different varga]
-  ↓
-ACCUMULATING-1 (re-run)
-  ↓
-...
-```
-
-**Case 2: Alpha = 1 (Extended mode for the consonants only)**
+**Case 1: Alpha = 1 (Extended mode for the consonants only)**
 ```
 [User selects Ja, Ha, or Ksha radio]
   ↓
@@ -79,7 +70,7 @@ VALIDATING-4: evalD() → output character
   ↓
 COMMIT immediately
 ```
-**Case 3: Special Modifiers, T = 1 (Extended mode for the vowels only)**
+**Case 2: Special Modifiers, T = 1 (Extended mode for the vowels only)**
 ```
 [User selects Pulli, Aytam or ZWNJ radio]
   ↓
@@ -90,7 +81,7 @@ VALIDATING-4: evalV() → output character
 COMMIT immediately
 ```
 
-**Case 4: Mode switching**
+**Case 3: Mode switching**
 ```
 [User selects different mode]
   ↓
